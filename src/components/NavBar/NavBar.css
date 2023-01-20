@@ -1,0 +1,28 @@
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+button {
+    background-color: black;
+    color: white;
+    border-radius: 100%;
+}
+
+input {
+    margin-left: 15px;
+    width:fit-content;
+}
+
+#basic-nav-dropdown {
+    color: black;
+}
+
+.navbar-nav {
+    display: flex;
+    justify-content: flex-end;
+}
+
+a {
+    color: orange;
+}

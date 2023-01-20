@@ -2,6 +2,7 @@ import "./App.css";
 import React, { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { getUser } from '../../utilities/users-service';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Home from "../Home/Home";
 import AuthPage from "../AuthPage/AuthPage";
@@ -15,10 +16,10 @@ export default function App() {
 
   return (
     <main className="App">
-      <h1 className="hello">Welcome to Scribist</h1>
       {user ? (
         <>
           <NavBar user={user} setUser={setUser}/>
+        <h1 className="hello">Welcome {user.name}, to Scribist</h1>
           <Routes>
             <Route path="/home" element={<Home />} />
             <Route path="/home/profile" element={<Profile />} />
