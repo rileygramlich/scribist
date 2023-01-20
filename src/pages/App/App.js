@@ -23,7 +23,6 @@ export default function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/home/profile" element={<Profile />} />
             <Route path="/:num" element={<Number />} />
-            <Route path="/*" element={<Home />} />
           </Routes>
         </>
       ) : (
