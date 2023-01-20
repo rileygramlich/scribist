@@ -9,6 +9,7 @@ import AuthPage from "../AuthPage/AuthPage";
 import Profile from "../Profile/Profile";
 import NavBar from "../../components/NavBar/NavBar";
 import Number from "../../components/Number/Number";
+import Doc from "../Doc/Doc";
 
 export default function App() {
   const [user, setUser] = useState(getUser());
@@ -19,9 +20,9 @@ export default function App() {
       {user ? (
         <>
           <NavBar user={user} setUser={setUser}/>
-        <h1 className="hello">Welcome {user.name}, to Scribist</h1>
           <Routes>
             <Route path="/home" element={<Home />} />
+            <Route path="/docs/new" element={<Doc />} />
             <Route path="/home/profile" element={<Profile />} />
             <Route path="/:num" element={<Number />} />
           </Routes>

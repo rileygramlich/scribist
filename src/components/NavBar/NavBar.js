@@ -7,7 +7,7 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 // CSS
-import "./NavBar.css"
+import "./NavBar.css";
 
 import * as userService from "../../utilities/users-service";
 
@@ -29,16 +29,19 @@ export default function NavBar({ user, setUser }) {
   return (
     <Navbar className="Navbar" bg="light" expand="lg">
       <Container className="container-fluid">
-        <Navbar.Brand className="logo" href="#home">Scribist</Navbar.Brand>
+        <Navbar.Brand className="logo" href="#home">
+          <Link to="/home">Scribist</Link>
+        </Navbar.Brand>
         <button className="dark-toggle">D</button>
         <form action="" className="search">
           <input type="text" name="search" />
-        {/* Add search functionality */}
+          {/* Add search functionality */}
         </form>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="container-fluid">
-            <NavDropdown className="ml-auto"
+            <NavDropdown
+              className="ml-auto"
               title="Utilities"
               id="basic-nav-dropdown"
               show={show}

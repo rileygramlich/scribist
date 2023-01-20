@@ -1,6 +1,7 @@
 .logo {
     font-size: 25px;
     font-weight: bold;
+    color: black;
 }
 
 button {
@@ -25,4 +26,5 @@ input {
 
 a {
     color: orange;
+    text-decoration: none;
 }
