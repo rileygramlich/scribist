@@ -1,21 +1,21 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+// const mongoose = require('mongoose');
+// const Schema = mongoose.Schema;
 
-const docSchema = new Schema({
-    name: {
-        type: String,
-        required: true,
-        default: "Section Title"
-    },
-    content: {
-        type: String,
-        required: false
-    },
-    wordCount: {
-      type: Number,
-    }
-}, {
-    timestamps: true,
-});
+// const sectionSchema = new Schema({
+//     name: {
+//         type: String,
+//         required: true,
+//         default: "Section Title"
+//     },
+//     content: {
+//         type: String,
+//         required: false
+//     },
+//     wordCount: {
+//       type: Number,
+//     }
+// }, {
+//     timestamps: true,
+// });
 
-module.exports = mongoose.model('Section', sectionSchema);
+// module.exports = mongoose.model('Section', sectionSchema);

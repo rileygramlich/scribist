@@ -6,10 +6,10 @@ import Card from "react-bootstrap/Card";
 // CSS
 import "./Home.css";
 
-export default function Home() {
+export default function Home({user}) {
   return (
     <main className="Home">
-      <h1 className="title">Home Page</h1>
+      <h1 className="title">{user.name}'s Home Page</h1>
       <div className="docs">
         <Button type="submit">
           <Link to="/docs/new">New Doc</Link>

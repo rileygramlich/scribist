@@ -1,0 +1,10 @@
+.sections-sidebar {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
