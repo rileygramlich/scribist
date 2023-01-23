@@ -32,7 +32,8 @@ const docSchema = new Schema({
     },
     wordCount: {
       type: Number,
-    }
+    },
+    user: { type: Schema.Types.ObjectId, ref: 'User' },
 }, {
     timestamps: true,
     // toJSON: {

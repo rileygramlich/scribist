@@ -11,6 +11,10 @@ export async function update(name, content, wordCount) {
   return sendRequest(`${BASE_URL}/update`, 'POST', { name, content, wordCount });
 }
 
+export function getAllDocs() {
+  return sendRequest(BASE_URL);
+}
+
 // export async function login(credentials) {
 //   // Fetch uses an options object as a second arg to make requests
 //   // other than basic GET requests, include data, headers, etc.

@@ -20,8 +20,8 @@ const userSchema = new Schema(
       trim: true,
       minLength: 3,
       required: true,
-    },
-    docs: { type: [Schema.Types.ObjectId], ref: DocSchema },
+    }
+    // docs: { type: [Schema.Types.ObjectId], ref: DocSchema },
   },
   {
     timestamps: true,

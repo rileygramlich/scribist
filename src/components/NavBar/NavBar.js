@@ -30,7 +30,7 @@ export default function NavBar({ user, setUser }) {
     <Navbar className="Navbar" bg="light" expand="lg">
       <Container className="container-fluid">
         <Navbar.Brand className="logo" href="#home">
-          <Link to="/home">Scribist</Link>
+          <Link to="/">Scribist</Link>
         </Navbar.Brand>
         <button className="dark-toggle">D</button>
         <form action="" className="search">

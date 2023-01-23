@@ -12,5 +12,7 @@ const ensureLoggedIn = require('../../config/ensureLoggedIn');
 // UPDATE:
 router.post('/create', docsCtrl.createDoc)
 
+// GET
+router.get('/', docsCtrl.index)
 
 module.exports = router;

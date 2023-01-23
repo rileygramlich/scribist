@@ -1,5 +1,10 @@
 .docs {
     display: flex;
+    justify-content: center;
+}
+
+.DocsList {
+    display: flex;
     justify-content: space-around;
-    gap: 15px;
+    gap: 30px;
 }
