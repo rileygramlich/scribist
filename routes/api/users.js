@@ -7,26 +7,26 @@ const express = require("express");
 const router = express.Router();
 const usersCtrl = require("../../controllers/api/users");
 
-// Google OAuth:
-const passport = require("passport");
-router.get(
-  "/auth/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
-);
+// // Google OAuth:
+// const passport = require("passport");
+// router.get(
+//   "/auth/google",
+//   passport.authenticate("google", { scope: ["profile", "email"] })
+// );
 
-router.get(
-  "/oauth2callback",
-  passport.authenticate("google", {
-    successRedirect: "/",
-    failureRedirect: "/",
-  })
-);
+// router.get(
+//   "/oauth2callback",
+//   passport.authenticate("google", {
+//     successRedirect: "/",
+//     failureRedirect: "/",
+//   })
+// );
 
-// OAuth logout route
-router.get('/logout', function(req, res){
-    req.logout();
-    res.redirect('/');
-  });
+// // OAuth logout route
+// router.get('/logout', function(req, res){
+//     req.logout();
+//     res.redirect('/');
+//   });
   
 
 // POST /api/users

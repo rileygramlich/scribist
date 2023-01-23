@@ -1,44 +1,45 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const bcrypt = require('bcrypt')
+const bcrypt = require("bcrypt");
+const DocSchema = require("./doc");
 
-const SALT_ROUNDS = 6;  // 6 is a reasonable value
+const SALT_ROUNDS = 6; // 6 is a reasonable value
 
-const userSchema = new Schema({
-    name: {type: String, required: true},
+const userSchema = new Schema(
+  {
+    name: { type: String, required: true },
     email: {
       type: String,
       unique: true,
       trim: true,
       lowercase: true,
-      required: true
+      required: true,
     },
     password: {
       type: String,
       trim: true,
       minLength: 3,
-      required: true
-    }
-    // Update user model to include ids of docs etc
-}, {
+      required: true,
+    },
+    docs: { type: [Schema.Types.ObjectId], ref: DocSchema },
+  },
+  {
     timestamps: true,
     toJSON: {
-        transform: function(doc, ret) {
-            delete ret.password;
-            return ret;
-        }
-    }
-});
+      transform: function (doc, ret) {
+        delete ret.password;
+        return ret;
+      },
+    },
+  }
+);
 
-
-userSchema.pre('save', async function(next) {
+userSchema.pre("save", async function (next) {
   // 'this' is the user doc
-  if (!this.isModified('password')) return next();
+  if (!this.isModified("password")) return next();
   // update the password with the computed hash
   this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
   return next();
 });
 
-module.exports = mongoose.model('User', userSchema);
-
-
+module.exports = mongoose.model("User", userSchema);
