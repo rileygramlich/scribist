@@ -19,6 +19,7 @@ const userSchema = new Schema({
       minLength: 3,
       required: true
     }
+    // Update user model to include ids of docs etc
 }, {
     timestamps: true,
     toJSON: {

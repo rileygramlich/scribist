@@ -62,6 +62,7 @@ export default function NavBar({ user, setUser }) {
               </NavDropdown.Item>
               <NavDropdown.Divider />
             </NavDropdown>
+            {user ? ( 
             <NavDropdown title="User" id="basic-nav-dropdown">
               <div>{user.name}</div>
               <div>{user.email}</div>
@@ -71,6 +72,13 @@ export default function NavBar({ user, setUser }) {
                 </Link>
               </NavDropdown.Item>
             </NavDropdown>
+              ) : ( <NavDropdown title="User" id="basic-nav-dropdown">
+              <NavDropdown.Item href="#action/3.2">
+                <Link to="/">
+                  Login
+                </Link>
+              </NavDropdown.Item>
+            </NavDropdown>)}
           </Nav>
         </Navbar.Collapse>
       </Container>

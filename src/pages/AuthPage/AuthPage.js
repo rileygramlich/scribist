@@ -1,6 +1,7 @@
 import React from 'react'
 import SignUpForm from '../../components/SignUpForm/SignUpForm'
 import LoginForm from '../../components/LoginForm/LoginForm'
+import { Link } from "react-router-dom";
 
 import { useState } from 'react'
 
@@ -17,6 +18,9 @@ export default function AuthPage({setUser}) {
       <h1>AuthPage</h1>
       <button onClick={handleShow}>{showLogin ? "Sign-up" : "Login"}</button>
       {showLogin ? <LoginForm setUser={setUser}/> : <SignUpForm setUser={setUser}/>}
+      <div className="Google">
+        <Link to="/auth/google">Login with Google</Link>
+      </div>
     </main>
   )
 }
