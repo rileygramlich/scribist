@@ -68,14 +68,14 @@ export default function NavBar({ user, setUser, toggleTheme }) {
                 <NavDropdown.Item className="drop-item">
                   <Link to="/type-test">Test Typing Speed</Link>
                 </NavDropdown.Item>
-                <NavDropdown.Divider />
               </div>
             </NavDropdown>
             {user ? (
               <NavDropdown title="User" id="basic-nav-dropdown">
                 <div className="drop-contain">
-                  <div>{user.name}</div>
-                  <div>{user.email}</div>
+                  <div>User: {user.name}</div>
+                  <div>Email: {user.email}</div>
+                <NavDropdown.Divider />
                   <NavDropdown.Item href="#action/3.2">
                     <Link to="/user/logout" onClick={handleLogout}>
                       Logout
