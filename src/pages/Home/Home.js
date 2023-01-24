@@ -2,10 +2,7 @@ import { useState, React, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-
-
 import DocsList from "../../components/DocsList/DocsList";
-
 
 // CSS
 import "./Home.css";
@@ -29,7 +26,10 @@ export default function Home({user}) {
         getDocs();
       }, []);
 
-
+      async function handleDelete(docId) {
+        console.log('deleting doc')
+        await docsAPI.deleteDoc(docId)
+      }
       
   return (
     <main className="Home">
@@ -38,7 +38,7 @@ export default function Home({user}) {
         <Button type="submit">
           <Link to="/docs/new">New Doc</Link>
         </Button>
-        <DocsList docs={docs} />
+        <DocsList docs={docs} handleDelete={handleDelete}/>
       </div>
     </main>
   );

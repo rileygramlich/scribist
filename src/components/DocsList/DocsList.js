@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card } from "react-bootstrap";
 
-export default function DocsList({docs}) {
+export default function DocsList({docs, handleDelete}) {
     const docCardEls = docs.map(doc => (
         <Card style={{ width: "18rem" }}>
             {console.log(doc)}
@@ -13,8 +13,8 @@ export default function DocsList({docs}) {
                 <Card.Text>
                   {doc.content}
                 </Card.Text>
-                <Card.Link href="#">Continue Doc</Card.Link>
-                <Card.Link href="#">Delete</Card.Link>
+                <Card.Link >Continue Doc</Card.Link>
+                <button onClick={(e) => handleDelete(doc._id)}>Delete</button>
               </Card.Body>
             </Card>
     ))

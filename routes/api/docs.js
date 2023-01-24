@@ -11,6 +11,7 @@ const ensureLoggedIn = require('../../config/ensureLoggedIn');
 
 // UPDATE:
 router.post('/create', docsCtrl.createDoc)
+router.post('/delete', docsCtrl.deleteDoc)
 
 // GET
 router.get('/', docsCtrl.index)

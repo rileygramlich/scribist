@@ -4,7 +4,8 @@ const Section = require("../../models/section");
 
 module.exports = {
   createDoc,
-  index
+  deleteDoc,
+  index,
 };
 
 
@@ -26,6 +27,21 @@ console.log('creating')
   await newDoc.save()
   console.log(newDoc)
   // user.docs.push(new)
+ } catch(err) {
+  res.status(409).json({ message: err.message})
+ }
+}
+
+async function deleteDoc(req, res) {
+console.log('deleting')
+ try {
+  const {docId} = req.body
+  // const wordCount = content.split(' ').length
+  // console.log(wordCount)
+  console.log(docId)
+  Doc.findOneAndDelete({_id: docId}).then(function(){
+    console.log('deleted')
+  })
  } catch(err) {
   res.status(409).json({ message: err.message})
  }
