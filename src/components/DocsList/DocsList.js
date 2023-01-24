@@ -8,7 +8,7 @@ export default function DocsList({docs, handleDelete}) {
               <Card.Body>
                 <Card.Title>{doc.name}</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">
-                  {doc.wordCount}
+                  Word Count: {doc.wordCount}
                 </Card.Subtitle>
                 <Card.Text>
                   {doc.content}

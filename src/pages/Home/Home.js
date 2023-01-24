@@ -17,7 +17,6 @@ export default function Home({user}) {
   useEffect(function () {
         async function getDocs() {
           const docs = await docsAPI.getAllDocs();
-          console.log(docs)
           setDocs(docs)
           docsRef.current = [
             ...new Set(docs.map((doc) => (doc))),
@@ -28,7 +27,8 @@ export default function Home({user}) {
 
       async function handleDelete(docId) {
         console.log('deleting doc')
-        await docsAPI.deleteDoc(docId)
+        const docs = await docsAPI.deleteDoc(docId)
+        setDocs(docs)
       }
       
   return (

@@ -42,6 +42,9 @@ console.log('deleting')
   Doc.findOneAndDelete({_id: docId}).then(function(){
     console.log('deleted')
   })
+  const docs = await Doc.find({})
+  console.log(docs)
+  res.json(docs);
  } catch(err) {
   res.status(409).json({ message: err.message})
  }
