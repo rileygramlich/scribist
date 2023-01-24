@@ -7,11 +7,12 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 // CSS
+import "../../pages/App/App.css";
 import "./NavBar.css";
 
 import * as userService from "../../utilities/users-service";
 
-export default function NavBar({ user, setUser }) {
+export default function NavBar({ user, setUser, toggleTheme }) {
   function handleLogout() {
     userService.logout();
     setUser(null);
@@ -27,14 +28,18 @@ export default function NavBar({ user, setUser }) {
   }
 
   return (
-    <Navbar className="Navbar" bg="light" expand="lg">
+    <Navbar className="Navbar" expand="lg" id="Nav">
       <Container className="container-fluid">
-        <Navbar.Brand className="logo" href="#home">
-          <Link to="/">Scribist</Link>
+        <Navbar.Brand className="logo-contain">
+          <Link className="logo" to="/">
+            Scribist
+          </Link>
         </Navbar.Brand>
-        <button className="dark-toggle">D</button>
+        <button className="dark-toggle" onClick={toggleTheme}>
+          D
+        </button>
         <form action="" className="search">
-          <input type="text" name="search" value="search ..."/>
+          <input type="text" name="search" value="search ..." />
           {/* Add search functionality */}
         </form>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -48,37 +53,43 @@ export default function NavBar({ user, setUser }) {
               onMouseEnter={showDropdown}
               onMouseLeave={hideDropdown}
             >
-              <NavDropdown.Item href="#action/3.1">
-                <Link to="/docs/new">New Doc</Link>
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                <Link to="/notes/new">New Note</Link>
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">
-                <Link to="/berserk">Berserk Mode</Link>
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.4">
-                <Link to="/type-test">Test Typing Speed</Link>
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
+              <div className="drop-contain">
+                <NavDropdown.Item className="drop-item">
+                  <Link className="drop-item" to="/docs/new">
+                    New Doc
+                  </Link>
+                </NavDropdown.Item>
+                <NavDropdown.Item className="drop-item">
+                  <Link to="/notes/new">New Note</Link>
+                </NavDropdown.Item>
+                <NavDropdown.Item className="drop-item">
+                  <Link to="/berserk">Berserk Mode</Link>
+                </NavDropdown.Item>
+                <NavDropdown.Item className="drop-item">
+                  <Link to="/type-test">Test Typing Speed</Link>
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+              </div>
             </NavDropdown>
-            {user ? ( 
-            <NavDropdown title="User" id="basic-nav-dropdown">
-              <div>{user.name}</div>
-              <div>{user.email}</div>
-              <NavDropdown.Item href="#action/3.2">
-                <Link to="/user/logout" onClick={handleLogout}>
-                  Logout
-                </Link>
-              </NavDropdown.Item>
-            </NavDropdown>
-              ) : ( <NavDropdown title="User" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.2">
-                <Link to="/">
-                  Login
-                </Link>
-              </NavDropdown.Item>
-            </NavDropdown>)}
+            {user ? (
+              <NavDropdown title="User" id="basic-nav-dropdown">
+                <div className="drop-contain">
+                  <div>{user.name}</div>
+                  <div>{user.email}</div>
+                  <NavDropdown.Item href="#action/3.2">
+                    <Link to="/user/logout" onClick={handleLogout}>
+                      Logout
+                    </Link>
+                  </NavDropdown.Item>
+                </div>
+              </NavDropdown>
+            ) : (
+              <NavDropdown title="User" id="basic-nav-dropdown">
+                <NavDropdown.Item href="#action/3.2">
+                  <Link to="/">Login</Link>
+                </NavDropdown.Item>
+              </NavDropdown>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -1,12 +1,42 @@
+/* Dark theme */
+
+:root {
+  --primary-color: #0a5a9f;
+  --secondary-color: #82a0c0;
+  --font-color: #fff;
+  --bg-color: #424242;
+  --heading-color: #20201d;
+}
+
+#light {
+  --primary-color: #82a0c0;
+  --secondary-color: #0a5a9f;
+  --font-color: #000000;
+  --bg-color: #d1d1d1;
+  --heading-color: #8f939f;
+}
+
+#dark {
+  background-color: var(--bg-color);
+  color: var(--font-color);
+}
+
+
+/* APP */
 .App {
   text-align: center;
+  min-height: 100vh;
+}
+
+Link {
+  color: var(--font-color)
 }
 
 button {
-  background-color: black;
-  color: white;
-  border: 1px solid black;
-  border-radius: 30%;
+  background-color: var(--primary-color);
+  color: var(--font-color);
+  border: 1px solid var(--primary-color);
+ 
 }
 
 .App-logo {
@@ -14,32 +44,64 @@ button {
   pointer-events: none;
 }
 
-/* @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+/* NAVBAR */
+#Nav {
+  background-color: var(--heading-color);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.logo {
+  font-size: 25px;
+  font-weight: bold;
+  color: var(--font-color);
+  text-decoration: none;
+}
+
+.dark-toggle {
+  background-color: var(--font-color);
+  color: var(--bg-color);
+  border-radius: 100%;
+  margin-right: 20px;
+}
+
+input {
+  margin-left: 15px;
+  width:fit-content;
+}
+
+#basic-nav-dropdown {
+  color: var(--font-color);
+}
+
+.drop-contain {
+  background-color: var(--bg-color);
+  color: var(--font-color)
+}
+
+.dropdown-menu {
+  background-color: var(--heading-color);
+}
+
+.navbar-nav {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: flex-end;
 }
 
-.App-link {
-  color: #61dafb;
+
+/* DOC PAGE */
+textarea {
+  background-color: var(--heading-color);
+  color: var(--font-color);
+  border: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
+
+/* HOME PAGE */
+#new-doc-btn {
+  background-color: var(--primary-color);
+  color: var(--font-color)
+}
+
+#doc-card {
+  background-color: var(--heading-color);
+}

@@ -3,7 +3,7 @@ import { Card } from "react-bootstrap";
 
 export default function DocsList({docs, handleDelete}) {
     const docCardEls = docs.map(doc => (
-        <Card style={{ width: "18rem" }}>
+        <Card id="doc-card" style={{ width: "18rem" }}>
             {console.log(doc)}
               <Card.Body>
                 <Card.Title>{doc.name}</Card.Title>

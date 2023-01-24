@@ -35,7 +35,7 @@ export default function Home({user}) {
     <main className="Home">
       <h1 className="title">{user.name}'s Home Page</h1>
       <div className="docs">
-        <Button type="submit">
+        <Button id="new-doc-btn" type="submit">
           <Link to="/docs/new">New Doc</Link>
         </Button>
         <DocsList docs={docs} handleDelete={handleDelete}/>
