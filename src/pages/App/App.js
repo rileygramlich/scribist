@@ -10,7 +10,8 @@ import Profile from "../Profile/Profile";
 import NavBar from "../../components/NavBar/NavBar";
 import Number from "../../components/Number/Number";
 import Doc from "../Doc/Doc";
-import { set } from "mongoose";
+import Berserk from "../Berserk/Berserk";
+
 
 export const ThemeContext = createContext(null);
 
@@ -32,6 +33,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<Home user={user} />} />
               <Route path="/docs/new" element={<Doc user={user} />} />
+              <Route path="/berserk" element={<Berserk user={user} />} />
               <Route path="/home/profile" element={<Profile />} />
               <Route path="/:num" element={<Number />} />
             </Routes>

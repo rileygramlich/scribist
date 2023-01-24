@@ -1,0 +1,33 @@
+.berserk-form {
+    border: 1px solid black;
+    min-height: 50vh;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.duration-contain, .target-contain {
+    display: flex;
+    gap: 30px
+}
+
+#duration {
+    min-width: 50vw;
+}
+
+.berserk-tools {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5vw;
+}
+
+.tool-bar-contain {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.typed {
+   
+}

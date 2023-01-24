@@ -14,7 +14,7 @@ export default function Home({user}) {
   const docsRef = useRef([])
   const [docs, setDocs] = useState([])
 
-  useEffect(function () {
+  useEffect(function() {
         async function getDocs() {
           const docs = await docsAPI.getAllDocs();
           setDocs(docs)
