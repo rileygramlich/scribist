@@ -39,7 +39,7 @@ export default function NavBar({ user, setUser, toggleTheme }) {
           D
         </button>
         <form action="" className="search">
-          <input type="text" name="search" value="search ..." />
+          <input type="text" name="search" placeholder="search ..." />
           {/* Add search functionality */}
         </form>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

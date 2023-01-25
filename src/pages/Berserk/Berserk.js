@@ -12,6 +12,7 @@ export default function Berserk() {
 
   const [typed, setTyped] = useState("");
   const [typedCount, setTypedCount] = useState(0);
+  const [bufferCount, setBufferCount] = useState(0)
 
   const [isPaused, setIsPaused] = useState(true);
   const [showTools, setShowTools] = useState(true)
@@ -48,10 +49,21 @@ export default function Berserk() {
     setTypedCount(count)
   }
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+        setTyped(typed.slice(0, -5))
+        console.log(typed)
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [typed]);
+
+
+
+
   return (
     <div className="Berserk">
       <h1 className="title">Berserk Page</h1>
-      <p>{typed}</p>
+      <p>{bufferCount}</p>
       {berserk ? (
         <div id="berserking">
           <textarea
@@ -59,6 +71,8 @@ export default function Berserk() {
             id=""
             cols="100"
             rows="25"
+            placeholder="Go berserk here..."
+            value={typed}
             ref={textAreaRef}
             onChange={(e) => handleTextChange(e)}
           ></textarea>
@@ -109,7 +123,7 @@ export default function Berserk() {
           </div>
           <button type="submit" id="berserk-button">
             Go Berserk and write {target} words in {Math.floor(time / 60)}{" "}
-            minutes {time % 60} seconds
+            minutes
           </button>
         </form>
       )}
