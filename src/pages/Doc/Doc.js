@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef, React } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Card } from "react-bootstrap";
-import { EditorState } from "draft-js";
-import { Editor } from "react-draft-wysiwyg";
+import TextEditor from "../../components/TextEditor/TextEditor";
+
 
 // import api-utils:
 import * as docsAPI from "../../utilities/docs-api";
@@ -33,38 +33,23 @@ export default function Doc({ user }) {
     let wordCount = content.split(" ").length - 1;
     // console.log(doc)
     docsAPI.create(name, content, wordCount);
-    navigate('/')
+    navigate("/");
   }
 
   return (
     <main className="Doc">
       <h1 className="title">{user.name}'s Doc Page</h1>
       <div className="page-container">
-        <Editor />
-        <div className="sections-sidebar">
-          {/* <a href="#" className="section">
-            section 1
-          </a>
-          <a href="#" className="section button">
-            section 2
-          </a>
-          <a href="#" className="section button">
-            section 3
-          </a> */}
-        </div>
+        <div className="sections-sidebar"></div>
         <form className="doc-form" onSubmit={handleSaveDoc}>
+          <label htmlFor="">Title: </label>
           <input
             type="text"
             name={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <textarea
-            name="content"
-            id=""
-            cols="70"
-            rows="30"
-            onChange={(e) => setContent(e.target.value)}
-          >
+          <TextEditor/>
+          <textarea name="content" id="" cols="70" rows="30">
             ...
           </textarea>
           <button type="submit">Save</button>

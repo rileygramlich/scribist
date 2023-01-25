@@ -14,8 +14,12 @@ This utility app is built with the intention of helping people write.
 ![]()
 
 ### Berserk Mode:
-If a user clicks on the 'Feed' option in the nav bar, they will be prompted with a display of their profile infomation and a timeline of their past posts.  Here the user has an option to create a post and fill out a form that takes a title, recent words learned, and the post content where the user is encouraged to integrate the words they just learned.  On the feed page, the user has the ability to click on the edit button for a post which brings them to an edit post page, and resubmits the edited version.  Or, if they wish, they can delete the post entirely by clicking which brings them to a confirmation page to see if they are sure about deleting it.
+
 ![gif of berserk mode]()
+
+### Typing Test:
+
+![gif of type test]()
 
 
 ## Screenshots:

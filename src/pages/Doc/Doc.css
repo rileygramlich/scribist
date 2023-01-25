@@ -1,3 +1,10 @@
+.Doc {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .sections-sidebar {
     display: flex;
     flex-direction: column;
