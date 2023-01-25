@@ -15,7 +15,7 @@ export default function Doc({ user }) {
   // const [sections, setSections] = useState(['section 1', 'section 2'])
 
   const [name, setName] = useState("");
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState({});
 
   const navigate = useNavigate();
 
@@ -27,13 +27,11 @@ export default function Doc({ user }) {
 
   const docsRef = useRef([]);
 
-  async function handleSaveDoc(event) {
-    event.preventDefault();
-    console.log("You are saving" + name + "   Content: " + content);
-    let wordCount = content.split(" ").length - 1;
+  async function handleSaveDoc() {
+    console.log("You are saving" + name);
+    console.log(content)
     // console.log(doc)
-    docsAPI.create(name, content, wordCount);
-    navigate("/");
+    docsAPI.create(name, content);
   }
 
   return (
@@ -48,7 +46,7 @@ export default function Doc({ user }) {
             name={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <TextEditor/>
+          <TextEditor handleSaveDoc={handleSaveDoc} content={content} setContent={setContent}/>
           <textarea name="content" id="" cols="70" rows="30">
             ...
           </textarea>
@@ -60,9 +58,9 @@ export default function Doc({ user }) {
             <Card.Body>
               <Card.Title>{name}</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">
-                Words: {content.split(" ").length}
+                {/* Words: {content.split(" ").length} */}
               </Card.Subtitle>
-              <Card.Text>{content}</Card.Text>
+              {/* <Card.Text>{content}</Card.Text> */}
               <Card.Link>Continue Doc</Card.Link>
               <Card.Link>Delete</Card.Link>
             </Card.Body>

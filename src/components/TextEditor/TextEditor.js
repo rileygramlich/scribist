@@ -1,4 +1,4 @@
-import {useCallback, React}  from 'react'
+import {useCallback, useState, useEffect, React}  from 'react'
 import Quill from "quill"
 import "quill/dist/quill.snow.css"
 import './TextEditor.css'
@@ -16,13 +16,32 @@ const TOOLBAR_OPTIONS = [
   ]
 
 
-export default function TextEditor() {
+export default function TextEditor({handleSaveDoc, setContent, content}) {
+    const [quill, setQuill] = useState()
+
+
+    useEffect(() => {
+        if (quill == null) return
+        const handler = (delta, oldDelta, source) => {
+            console.log(delta)
+            console.log(source)
+            setContent(delta)
+            handleSaveDoc()
+        }
+        quill.on("text-change", handler)
+
+        return () => {
+            quill.off("text-change", handler)
+        }
+    }, [quill])
+
     const containerRef = useCallback((container) => {
         const editor = document.createElement("div")
         if (container == null) return
         container.innerHTML = ''
         container.append(editor)
-        new Quill(editor, {theme: "snow", modules: { toolbar: TOOLBAR_OPTIONS}})
+        const q = new Quill(editor, {theme: "snow", modules: { toolbar: TOOLBAR_OPTIONS}})
+        setQuill(q)
     
         return () => {
             containerRef.innerHTML = ""

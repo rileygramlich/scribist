@@ -32,7 +32,7 @@ export default function App() {
           <>
             <Routes>
               <Route path="/" element={<Home user={user} />} />
-              <Route path="/docs/new" element={<Doc user={user} />} />
+              <Route path="/docs/:docId" element={<Doc user={user}/>} />
               <Route path="/berserk" element={<Berserk user={user} />} />
               <Route path="/home/profile" element={<Profile />} />
               <Route path="/:num" element={<Number />} />

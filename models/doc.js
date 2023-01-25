@@ -26,12 +26,10 @@ const docSchema = new Schema({
         required: true,
         maxLength: 250,
         default: "New Doc"},
-    content: {
-        type: String,
-        maxLength: 600000,
-    },
+    content: Object,
     wordCount: {
       type: Number,
+      default: 0
     },
     user: { type: Schema.Types.ObjectId, ref: 'User' },
 }, {

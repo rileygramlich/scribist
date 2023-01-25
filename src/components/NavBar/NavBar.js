@@ -1,5 +1,5 @@
 import { useState, React } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // Bootstrap imports
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -11,8 +11,11 @@ import "../../pages/App/App.css";
 import "./NavBar.css";
 
 import * as userService from "../../utilities/users-service";
+import * as docsAPI from "../../utilities/docs-api"
 
 export default function NavBar({ user, setUser, toggleTheme }) {
+  const navigate = useNavigate();
+
   function handleLogout() {
     userService.logout();
     setUser(null);
@@ -25,6 +28,13 @@ export default function NavBar({ user, setUser, toggleTheme }) {
 
   function hideDropdown(e) {
     setShow(false);
+  }
+
+  async function handleNewDoc() {
+    console.log('handling')
+    const docId = await docsAPI.create();
+    navigate(`/docs/${docId}`)
+    // await docsAPI.getDoc(docId)
   }
 
   return (
@@ -55,8 +65,8 @@ export default function NavBar({ user, setUser, toggleTheme }) {
             >
               <div className="drop-contain">
                 <NavDropdown.Item className="drop-item">
-                  <Link className="drop-item" to="/docs/new">
-                    New Doc
+                  <Link className="drop-item">
+                    <button onClick={handleNewDoc}>New Doc</button>
                   </Link>
                 </NavDropdown.Item>
                 <NavDropdown.Item className="drop-item">

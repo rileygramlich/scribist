@@ -3,8 +3,12 @@
 import { sendRequest } from "./send-request";
 const BASE_URL = "/api/docs";
 
-export async function create(name, content, wordCount) {
-  return sendRequest(`${BASE_URL}/create`, 'POST', { name, content, wordCount });
+export async function create() {
+  return sendRequest(`${BASE_URL}/create`, 'POST');
+}
+
+export async function getDoc(docId) {
+  return sendRequest(`${BASE_URL}/${docId}`, 'GET', {docId});
 }
 
 export async function update(name, content, wordCount) {

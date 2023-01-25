@@ -14,6 +14,7 @@ router.post('/create', docsCtrl.createDoc)
 router.post('/delete', docsCtrl.deleteDoc)
 
 // GET
+router.get('/:docId', docsCtrl.getDoc)
 router.get('/', docsCtrl.index)
 
 module.exports = router;
