@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+# Scribist
+### A writing app with editing features, note taking, Berserk Mode writing, todos, timer, and testing your typing speed.
+#### By [rileygramlich](https://github.com/rileygramlich)
+---
+[Click to use Scribist!]()
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description and Background Info:
+This utility app is built with the intention of helping people write.
 
-## Available Scripts
+### Create and Edit Docs:
 
-In the project directory, you can run:
+![gif of doc page]()
 
-### `npm start`
+![]()
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Berserk Mode:
+If a user clicks on the 'Feed' option in the nav bar, they will be prompted with a display of their profile infomation and a timeline of their past posts.  Here the user has an option to create a post and fill out a form that takes a title, recent words learned, and the post content where the user is encouraged to integrate the words they just learned.  On the feed page, the user has the ability to click on the edit button for a post which brings them to an edit post page, and resubmits the edited version.  Or, if they wish, they can delete the post entirely by clicking which brings them to a confirmation page to see if they are sure about deleting it.
+![gif of berserk mode]()
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## Screenshots:
+Of ..:
+![Screenshots]()
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Technologies Used:
+The MERN (MongoDB, Express, Reactm Node.js) stack was used to develop this full-stack web application.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* [MongoDB](https://www.mongodb.com/): used to deploy a live cloud server to store data in a database. User model with mongoose referencing for the known and known words (many to many), and mongoose embedding for the posts (one to many).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* [Express](https://expressjs.com/): used for handling all of the back-end operations (routing, schema data manipulation, and so on).
 
-### `npm run eject`
+* [React.js](https://reactjs.org/): UI JavaScript Library. [more here]
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+* [Node.js](https://nodejs.org/en/): used as the live server environment, to monitor server operations, and view the web-app in a browser when running nodemon.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* [Google People API](https://console.cloud.google.com/): used as a third party API to make Oauthentication with Google possible and bring in Google user data.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+* Javascript: used constantly throughout the application to write functions and manipulate the data accordingly.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+* CSS (including bootstrap and materialize libraries): used to style the app and make it look clean and pretty.
 
-## Learn More
+* [Github](https://github.com/): used for version control.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+* [VSCode Editor](https://code.visualstudio.com/): used to write and code and manage file locations.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<!-- * [Railway](https://railway.app/): used for deploying the app for others to use. Use now: [link to app] -->
 
-### Code Splitting
+* [Trello](https://trello.com/u/rileygramlich1/boards): was used for making a do list list and managing tasks to get done.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+* [Lucid](https://lucid.app/documents): used to create an initial ERD (environment relationship diagram.
 
-### Analyzing the Bundle Size
+* [Figma](): used to create the original wireframe.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+* Markdown: used to create this README.md
 
-### Making a Progressive Web App
+* Google Chrome and its developer tools was used to test the app during production.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Getting Started: 
 
-### Advanced Configuration
+### Demo:
+[Click to write your dream project now!]()
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Next Steps: Planned future enhancements:
+1. IceBox Items here
