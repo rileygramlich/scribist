@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, React } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import TextEditor from "../../components/TextEditor/TextEditor";
 
@@ -13,26 +13,29 @@ import "./Doc.css";
 export default function Doc({ user }) {
   // Initilize hooks for docs since we'll be doing client side, rendering.
   // const [sections, setSections] = useState(['section 1', 'section 2'])
+  const {docId} = useParams()
 
   const [name, setName] = useState("");
   const [content, setContent] = useState({});
 
   const navigate = useNavigate();
 
-  // const [doc, setDoc] = useState({
-  //     name: name,
-  //     content: content,
-  //     wordCount: content.split(' ').length
-  // })
 
   const docsRef = useRef([]);
 
-  async function handleSaveDoc() {
-    console.log("You are saving" + name);
+  async function handleSaveDoc(content) {
+    console.log("You are saving");
+    console.log(name)
     console.log(content)
-    // console.log(doc)
-    docsAPI.create(name, content);
+    await docsAPI.update(docId, name, content);
   }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleSaveDoc(content)
+    }, 5000)
+    return () => {clearInterval(interval)}
+  }, [content])
 
   return (
     <main className="Doc">
@@ -46,7 +49,7 @@ export default function Doc({ user }) {
             name={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <TextEditor handleSaveDoc={handleSaveDoc} content={content} setContent={setContent}/>
+          <TextEditor handleSaveDoc={handleSaveDoc} content={content} setContent={setContent} name={name}/>
           <textarea name="content" id="" cols="70" rows="30">
             ...
           </textarea>

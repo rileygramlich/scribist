@@ -4,6 +4,7 @@ const Section = require("../../models/section");
 
 module.exports = {
   createDoc,
+  updateDoc,
   deleteDoc,
   index,
   getDoc,
@@ -21,7 +22,7 @@ async function createDoc(req, res) {
     const docId = newDoc._id;
     console.log(docId);
     console.log(newDoc);
-    res.redirect(`/api/docs/${docId}`);
+    res.json(docId);
   } catch (err) {
     res.status(409).json({ message: err.message });
   }
@@ -56,7 +57,26 @@ async function index(req, res) {
   }
 }
 
-function getDoc(req, res) {
+async function getDoc(req, res) {
   console.log("getting doc");
-  res.json(req.params.docId)
+  console.log(req.params.docId);
+  const currDoc = await Doc.findById(req.params.docId);
+  res.status(200).json(currDoc);
+}
+
+async function updateDoc(req, res) {
+  // first get the doc and then update the name and content
+  try {
+    console.log("updating");
+    console.log(req.body);
+    console.log(req.body.content);
+    const doc = await Doc.findByIdAndUpdate(req.params.docId, {
+      name: req.body.name,
+      content: req.body.content,
+    });
+    console.log(doc);
+    res.json(doc);
+  } catch (err) {
+    console.log(err)
+  }
 }

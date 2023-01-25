@@ -13,8 +13,7 @@ import "./NavBar.css";
 import * as userService from "../../utilities/users-service";
 import * as docsAPI from "../../utilities/docs-api"
 
-export default function NavBar({ user, setUser, toggleTheme }) {
-  const navigate = useNavigate();
+export default function NavBar({ user, setUser, toggleTheme, handleNewDoc }) {
 
   function handleLogout() {
     userService.logout();
@@ -30,12 +29,6 @@ export default function NavBar({ user, setUser, toggleTheme }) {
     setShow(false);
   }
 
-  async function handleNewDoc() {
-    console.log('handling')
-    const docId = await docsAPI.create();
-    navigate(`/docs/${docId}`)
-    // await docsAPI.getDoc(docId)
-  }
 
   return (
     <Navbar className="Navbar" expand="lg" id="Nav">

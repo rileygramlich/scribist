@@ -11,8 +11,8 @@ export async function getDoc(docId) {
   return sendRequest(`${BASE_URL}/${docId}`, 'GET', {docId});
 }
 
-export async function update(name, content, wordCount) {
-  return sendRequest(`${BASE_URL}/update`, 'POST', { name, content, wordCount });
+export async function update(docId, name, content) {
+  return sendRequest(`${BASE_URL}/${docId}/update`, 'POST', { name, content});
 }
 
 export async function deleteDoc(docId) {

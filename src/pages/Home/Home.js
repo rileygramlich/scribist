@@ -10,7 +10,7 @@ import "./Home.css";
 // import api-utils:
 import * as docsAPI from "../../utilities/docs-api"
 
-export default function Home({user}) {
+export default function Home({user, handleNewDoc}) {
   const docsRef = useRef([])
   const [docs, setDocs] = useState([])
 
@@ -35,8 +35,8 @@ export default function Home({user}) {
     <main className="Home">
       <h1 className="title">{user.name}'s Home Page</h1>
       <div className="docs">
-        <Button id="new-doc-btn" type="submit">
-          <Link to="/docs/new">New Doc</Link>
+        <Button id="new-doc-btn" type="submit" onClick={handleNewDoc}>
+
         </Button>
         <DocsList docs={docs} handleDelete={handleDelete}/>
       </div>

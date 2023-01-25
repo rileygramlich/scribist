@@ -3,6 +3,8 @@ import Quill from "quill"
 import "quill/dist/quill.snow.css"
 import './TextEditor.css'
 
+import * as docsAPI from "../../utilities/docs-api";
+
 const TOOLBAR_OPTIONS = [
     [{ header: [1, 2, 3, 4, 5, 6, false] }],
     [{ font: [] }],
@@ -23,10 +25,9 @@ export default function TextEditor({handleSaveDoc, setContent, content}) {
     useEffect(() => {
         if (quill == null) return
         const handler = (delta, oldDelta, source) => {
-            console.log(delta)
-            console.log(source)
             setContent(delta)
-            handleSaveDoc()
+            console.log(content)
+            handleSaveDoc(content)
         }
         quill.on("text-change", handler)
 

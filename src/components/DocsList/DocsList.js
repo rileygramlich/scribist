@@ -8,10 +8,10 @@ export default function DocsList({docs, handleDelete}) {
               <Card.Body>
                 <Card.Title>{doc.name}</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">
-                  Word Count: {doc.wordCount}
+                  {/* Word Count: {doc.wordCount} */}
                 </Card.Subtitle>
                 <Card.Text>
-                  {doc.content}
+                  {/* {doc.content} */}
                 </Card.Text>
                 <Card.Link >Continue Doc</Card.Link>
                 <button onClick={(e) => handleDelete(doc._id)}>Delete</button>
