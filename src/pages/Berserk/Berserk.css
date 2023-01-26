@@ -1,6 +1,9 @@
 .berserk-form {
-    border: 1px solid black;
+    border: 1px solid var(--heading-color);
+    border-radius: 20px;
+    background-color: var(--heading-color);
     min-height: 50vh;
+    margin-inline: 5vw;
     display: flex;
     justify-content: space-evenly;
 }
@@ -10,9 +13,10 @@
     gap: 30px
 }
 
-#duration {
+#time {
     min-width: 50vw;
 }
+
 
 .berserk-tools {
     display: flex;

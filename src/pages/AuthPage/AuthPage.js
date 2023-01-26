@@ -13,7 +13,7 @@ export default function AuthPage({ setUser }) {
   const [showLogin, setShowLogin] = useState(true);
   // const dispatch = useDispatch()
 
-  console.log(process.env.GOOGLE_CLIENT_ID);
+  // console.log(process.env.GOOGLE_CLIENT_ID);
 
   function handleShow() {
     let status = !showLogin;
@@ -38,8 +38,8 @@ export default function AuthPage({ setUser }) {
 
   return (
     <main className="AuthPage">
-      <h1>AuthPage</h1>
-      <button onClick={handleShow}>{showLogin ? "Sign-up" : "Login"}</button>
+      {/* <h1>AuthPage</h1> */}
+      <button onClick={handleShow}>{showLogin ? "Sign-up Form" : "Login Form"}</button>
       {showLogin ? (
         <LoginForm setUser={setUser} />
       ) : (

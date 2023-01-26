@@ -1,6 +1,5 @@
 // users-service.js
 import * as usersAPI from './users-api';
-import {sendRequest} from './send-request'
 
 export async function signUp(userData) {
   // Delegate the network request code to the users-api.js API module

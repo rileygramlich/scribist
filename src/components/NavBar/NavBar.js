@@ -63,12 +63,12 @@ export default function NavBar({ user, setUser, toggleTheme, handleNewDoc }) {
               <div className="drop-contain">
                 <NavDropdown.Item className="drop-item">
                   <Link className="drop-item">
-                    <button onClick={handleNewDoc}>New Doc</button>
+                    <button className='new-doc-btn' onClick={handleNewDoc}>New Doc</button>
                   </Link>
                 </NavDropdown.Item>
-                <NavDropdown.Item className="drop-item">
+                {/* <NavDropdown.Item className="drop-item">
                   <Link to="/notes/new">New Note</Link>
-                </NavDropdown.Item>
+                </NavDropdown.Item> */}
                 <NavDropdown.Item className="drop-item">
                   <Link to="/berserk">Berserk Mode</Link>
                 </NavDropdown.Item>
@@ -83,7 +83,7 @@ export default function NavBar({ user, setUser, toggleTheme, handleNewDoc }) {
                   <div>User: {user.name}</div>
                   <div>Email: {user.email}</div>
                 <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action/3.2">
+                  <NavDropdown.Item href="">
                     <Link to="/user/logout" onClick={handleLogout}>
                       Logout
                     </Link>

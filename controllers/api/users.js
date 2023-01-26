@@ -11,6 +11,7 @@ module.exports = {
 /*-- Helper Functions --*/
 
 function createJWT(user) {
+  console.log('ceating-jwt')
   return jwt.sign(
     // data payload
     { user },
@@ -21,6 +22,7 @@ function createJWT(user) {
 
 async function create(req, res) {
   try {
+    console.log('creating')
     const user = await User.create(req.body);
     const token = createJWT(user);
     res.status(200).json(token);

@@ -1,31 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-export default function Timer({ time, showTools, isPaused }) {
-  const initMins = Math.floor(time / 60);
-  const initSecs = time % 60;
-  const [minutes, setMinutes] = useState(initMins);
-  const [seconds, setSeconds] = useState(initSecs);
-
-  useEffect(() => {
-    let myInterval = setInterval(() => {
-      console.log(isPaused)
-      if ((seconds > -1800) && (!isPaused)) {
-        setSeconds(seconds - 1);
-      }
-      if (seconds === 0) {
-        if (minutes === 0) {
-          clearInterval(myInterval);
-        } else {
-          setMinutes(minutes - 1);
-          setSeconds(59);
-        }
-      }
-    }, 1000);
-    return () => {
-      clearInterval(myInterval);
-    };
-  });
+export default function Timer({ time, showTools, isPaused, minutes, seconds }) {
 
   return (
     <div className="Timer">

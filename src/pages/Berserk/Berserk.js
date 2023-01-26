@@ -15,7 +15,7 @@ export default function Berserk() {
   const [typed, setTyped] = useState("");
   const [typedCount, setTypedCount] = useState(0);
 
-  const [isPaused, setIsPaused] = useState(true);
+  const [isPaused, setIsPaused] = useState(false);
   const [showTools, setShowTools] = useState(true);
 
   const textAreaRef = useRef(null);
@@ -54,6 +54,29 @@ export default function Berserk() {
     setTypedCount(count);
   }
 
+  const initMins = Math.floor(time / 60);
+  const initSecs = time % 60;
+  const [minutes, setMinutes] = useState(initMins);
+  const [seconds, setSeconds] = useState(initSecs);
+
+  useEffect(() => {
+    let myInterval = setInterval(() => {
+      if ((seconds > -1800) && (!isPaused)) {
+        setSeconds(seconds - 1);
+      }
+      if (seconds === 0) {
+        if (minutes === 0) {
+        } else {
+          setMinutes(minutes - 1);
+          setSeconds(59);
+        }
+      }
+    }, 1000);
+    return () => {
+      clearInterval(myInterval);
+    };
+  });
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (!isPaused) {
@@ -65,7 +88,7 @@ export default function Berserk() {
 
   return (
     <div className="Berserk">
-      <h1 className="title">Berserk Page</h1>
+      <h1 className="title">Go Berserk.</h1>
       {berserk ? (
         <div id="berserking">
           <textarea
@@ -87,6 +110,8 @@ export default function Berserk() {
               showTools={showTools}
               isPaused={isPaused}
               setIsPaused={setIsPaused}
+              minutes={minutes}
+              seconds={seconds}
             />
             {showTools ? (
               <div className="tool-bar-contain">
@@ -130,6 +155,7 @@ export default function Berserk() {
             <input
               type="number"
               name="target"
+              value={target}
               id="word-target"
               onChange={(e) => setTarget(e.target.value)}
             />

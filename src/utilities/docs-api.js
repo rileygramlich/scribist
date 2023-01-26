@@ -1,6 +1,6 @@
 // Handle incoming doc requests here
 
-import { sendRequest } from "./send-request";
+import sendRequest from "./send-request";
 const BASE_URL = "/api/docs";
 
 export async function create() {

@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { createContext, useState, useContext, useParams } from "react";
-import { Routes, Route, useNavigate, Redirect  } from "react-router-dom";
+import { Routes, Route, useNavigate, Redirect } from "react-router-dom";
 import { getUser } from "../../utilities/users-service";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -18,45 +18,59 @@ import * as docsAPI from "../../utilities/docs-api";
 
 export const ThemeContext = createContext(null);
 
-
 export default function App() {
   const [user, setUser] = useState(getUser());
   const [theme, setTheme] = useState("dark");
-  
-  const navigate = useNavigate()
+
+  const navigate = useNavigate();
 
   function toggleTheme() {
-    console.log('changing theme')
-    setTheme((curr) => (curr === "light" ? "dark" : "light"))
+    console.log("changing theme");
+    setTheme((curr) => (curr === "light" ? "dark" : "light"));
   }
 
   async function handleNewDoc() {
-    console.log('handling')
+    console.log("handling");
     const docId = await docsAPI.create();
-    console.log('redirecting:' + docId)
-    navigate(`/docs/${docId}`)
+    console.log("redirecting:" + docId);
+    navigate(`/docs/${docId}`);
     // await docsAPI.getDoc(docId)
   }
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <main className="App" id={theme}>
-        <NavBar user={user} setUser={setUser} toggleTheme={toggleTheme} handleNewDoc={handleNewDoc}/>
+        <NavBar
+          user={user}
+          setUser={setUser}
+          toggleTheme={toggleTheme}
+          handleNewDoc={handleNewDoc}
+        />
         {user ? (
           <>
             <Routes>
-              <Route path="/" element={<Home user={user} handleNewDoc={handleNewDoc}/>} />
-              <Route path="/docs/:docId" element={<Doc user={user}/>} />
-              <Route path="/berserk" element={<Berserk user={user} />} />
-              <Route path="/about" element={<About user={user}/>} />
-              <Route path="/home/profile" element={<Profile />} />
-              <Route path="/:num" element={<Number />} />
+              <Route
+                path="/"
+                element={<Home user={user} handleNewDoc={handleNewDoc} />}
+              />
+              <Route path="/berserk" element={<Berserk />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/docs/:docId" element={<Doc user={user} />} />
             </Routes>
           </>
         ) : (
-          <AuthPage setUser={setUser} />
+          <Routes>
+            <Route path="/berserk" element={<Berserk />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/auth-page" element={<AuthPage setUser={setUser} />} />
+            <Route path="/" element={<AuthPage setUser={setUser} />} />
+            <Route
+              path="/docs/:docId"
+              element={<AuthPage setUser={setUser} />}
+            />
+          </Routes>
         )}
-        <Footer/>
+        <Footer />
       </main>
     </ThemeContext.Provider>
   );

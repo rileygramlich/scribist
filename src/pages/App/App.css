@@ -31,10 +31,10 @@
 .Home,
 .Doc,
 .About,
-.Berserk, .AuthPage {
+.Berserk,
+.AuthPage {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   min-height: 100vh;
 }
 

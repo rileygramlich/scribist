@@ -11,11 +11,11 @@ const ensureLoggedIn = require('../../config/ensureLoggedIn');
 
 // UPDATE:
 router.post('/create', docsCtrl.createDoc)
-router.post('/:docId/update', ensureLoggedIn, docsCtrl.updateDoc)
-router.post('/delete', ensureLoggedIn, docsCtrl.deleteDoc)
+router.post('/:docId/update', docsCtrl.updateDoc)
+router.post('/delete',  docsCtrl.deleteDoc)
 
 // GET
-router.get('/:docId', ensureLoggedIn, docsCtrl.getDoc)
-router.get('/', ensureLoggedIn, docsCtrl.index)
+router.get('/:docId', docsCtrl.getDoc)
+router.get('/', docsCtrl.index)
 
 module.exports = router;
