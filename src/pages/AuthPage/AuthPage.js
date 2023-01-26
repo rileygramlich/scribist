@@ -2,7 +2,6 @@ import React from "react";
 import SignUpForm from "../../components/SignUpForm/SignUpForm";
 import LoginForm from "../../components/LoginForm/LoginForm";
 import { Link } from "react-router-dom";
-import { GoogleLogin } from "react-google-login";
 import {useDispatch} from 'react-redux'
 
 
@@ -39,7 +38,7 @@ export default function AuthPage({ setUser }) {
   return (
     <main className="AuthPage">
       {/* <h1>AuthPage</h1> */}
-      <button onClick={handleShow}>{showLogin ? "Sign-up Form" : "Login Form"}</button>
+      <button onClick={handleShow}>{showLogin ? "Don't have an account with us?" : "Already a user."}</button>
       {showLogin ? (
         <LoginForm setUser={setUser} />
       ) : (
