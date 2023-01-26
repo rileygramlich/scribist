@@ -12,6 +12,7 @@ import Number from "../../components/Number/Number";
 import Doc from "../Doc/Doc";
 import Berserk from "../Berserk/Berserk";
 import About from "../About/About";
+import Footer from "../../components/Footer/Footer";
 
 import * as docsAPI from "../../utilities/docs-api";
 
@@ -55,6 +56,7 @@ export default function App() {
         ) : (
           <AuthPage setUser={setUser} />
         )}
+        <Footer/>
       </main>
     </ThemeContext.Provider>
   );

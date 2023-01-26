@@ -7,8 +7,8 @@ export default function About() {
       <p className="about-content">
         Scribist was designed and developed by Riley Gramlich, a full-stack
         developer from Alberta, Canada.
-        <link target="_blank" rel="stylesheet" href="https://github.com/rileygramlich" />
       </p>
+        <a target="_blank" rel="stylesheet" href="https://github.com/rileygramlich">My Github</a>
     </div>
   );
 }

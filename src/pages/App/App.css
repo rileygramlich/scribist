@@ -28,6 +28,17 @@
   min-height: 100vh;
 }
 
+.Home,
+.Doc,
+.About,
+.Berserk {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: left;
+}
+
 Link {
   color: var(--font-color)
 }
