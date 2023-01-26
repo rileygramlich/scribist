@@ -12,19 +12,15 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
+
 
 .footer {
   position: relative;
   width: 100%;
   background: #3586ff;
-  min-height: 100px;
-  padding: 20px 50px;
+  min-height: 50px;
+  max-height: px;
+  padding: 5px 25px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,7 +33,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px 0;
+  margin: 3px 0;
   flex-wrap: wrap;
 }
 
@@ -74,7 +70,7 @@
 
 .footer p {
   color: #fff;
-  margin: 15px 0 10px 0;
+  margin: 5px 0 7px 0;
   font-size: 1rem;
   font-weight: 300;
 }

@@ -6,6 +6,8 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
+import { MdDarkMode } from "react-icons/md";
+
 // CSS
 import "../../pages/App/App.css";
 import "./NavBar.css";
@@ -39,7 +41,7 @@ export default function NavBar({ user, setUser, toggleTheme, handleNewDoc }) {
           </Link>
         </Navbar.Brand>
         <button className="dark-toggle" onClick={toggleTheme}>
-          D
+        <MdDarkMode/>
         </button>
         <form action="" className="search">
           <input type="text" name="search" placeholder="search ..." />

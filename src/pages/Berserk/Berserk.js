@@ -2,6 +2,8 @@ import React, { useState, useRef, useContext, useEffect } from "react";
 import { Navigator } from "react-router-dom";
 import Timer from "../../components/Timer/Timer";
 
+import { FaPause, FaPlay, FaCopy } from "react-icons/fa";
+
 // CSS
 import "./Berserk.css";
 
@@ -14,7 +16,7 @@ export default function Berserk() {
   const [typedCount, setTypedCount] = useState(0);
 
   const [isPaused, setIsPaused] = useState(true);
-  const [showTools, setShowTools] = useState(true)
+  const [showTools, setShowTools] = useState(true);
 
   const textAreaRef = useRef(null);
 
@@ -26,41 +28,40 @@ export default function Berserk() {
   }
 
   function toggleBerserk() {
-    setBerserk(!berserk)
+    setBerserk(!berserk);
   }
 
   function toggleTools() {
-    console.log('toggling tools')
-      setShowTools(!showTools)
+    console.log("toggling tools");
+    setShowTools(!showTools);
   }
 
   function togglePause() {
-    console.log('toggling pause')
-      setIsPaused(!isPaused)
+    console.log("toggling pause");
+    setIsPaused(!isPaused);
   }
 
   function handleCopy(e) {
-    textAreaRef.current.select()
-    document.execCommand('copy')
-    e.target.focus()
-    console.log('text copied')
+    textAreaRef.current.select();
+    document.execCommand("copy");
+    e.target.focus();
+    console.log("text copied");
   }
 
   function handleTextChange(newValue) {
-    setTyped(newValue)
-    const count = typed.split(' ').filter(word => word !== '').length
-    setTypedCount(count)
+    setTyped(newValue);
+    const count = typed.split(" ").filter((word) => word !== "").length;
+    setTypedCount(count);
   }
 
   useEffect(() => {
     const interval = setInterval(() => {
-        if (!isPaused) {
-            handleTextChange(typed.slice(0, -5))
-        }
+      if (!isPaused) {
+        handleTextChange(typed.slice(0, -5));
+      }
     }, 2000);
     return () => clearInterval(interval);
   }, [typed]);
-
 
   return (
     <div className="Berserk">
@@ -78,22 +79,33 @@ export default function Berserk() {
             onChange={(e) => handleTextChange(e.target.value)}
           ></textarea>
           <div className="berserk-tools">
-            <button className="show-controls" onClick={toggleTools}>{showTools ? 'Hide' : 'Show'}</button>
-            <Timer time={time} showTools={showTools} isPaused={isPaused} setIsPaused={setIsPaused}/>
+            <button className="show-controls" onClick={toggleTools}>
+              {showTools ? "Hide" : "Show"}
+            </button>
+            <Timer
+              time={time}
+              showTools={showTools}
+              isPaused={isPaused}
+              setIsPaused={setIsPaused}
+            />
             {showTools ? (
-                <div className="tool-bar-contain">
-              <div className="typed">
-                {typedCount} / {target} words
+              <div className="tool-bar-contain">
+                <div className="typed">
+                  {typedCount} / {target} words
+                </div>
+                <div className="buttons"></div>
+                <button type="submit" className="finish">
+                  Done
+                </button>
+                <button className="pause" onClick={togglePause}>
+                  {isPaused ? <FaPlay /> : <FaPause />}
+                </button>
+                <button className="copy" onClick={handleCopy}>
+                  <FaCopy/>
+                </button>
               </div>
-              <div className="buttons"></div>
-              <button type="submit" className="finish">
-                Done
-              </button>
-              <button className="pause" onClick={togglePause}>{isPaused ? 'Play(symbol)' : 'Pause(symbol)'}</button>
-              <button className="copy" onClick={handleCopy}>Copy (copy symbol)</button>
-            </div>
             ) : (
-                <p>Keep on berserkin'!</p>
+              <p>Keep on berserkin'!</p>
             )}
           </div>
         </div>
