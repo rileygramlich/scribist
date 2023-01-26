@@ -8,6 +8,9 @@ const logger = require('morgan');
 // var session = require('express-session');
 // var passport = require('passport');
 
+var debug = require('debug')('realtime-socket-io:server');
+var http = require('http');
+
 
 require('dotenv').config()
 require('./config/database');
@@ -17,6 +20,13 @@ const app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
+
+// Cors access
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 // Google Oauth
 // app.use(cookieParser());
@@ -56,3 +66,10 @@ app.use('/api/docs', require('./routes/api/docs'));
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
+
+ // inside bin/www
+ var server = http.createServer(app);
+ 
+ // load and attach socket.io to http server
+ var io = require('./io');
+ io.attach(server);

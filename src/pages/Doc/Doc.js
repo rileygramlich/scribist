@@ -4,6 +4,7 @@ import { Card } from "react-bootstrap";
 import TextEditor from "../../components/TextEditor/TextEditor";
 
 
+
 // import api-utils:
 import * as docsAPI from "../../utilities/docs-api";
 
@@ -47,7 +48,7 @@ export default function Doc({ user }) {
   useEffect(() => {
     const interval = setInterval(() => {
       handleSaveDoc(content)
-    }, 5000)
+    }, 50000)
     return () => {clearInterval(interval)}
   }, [content])
 
@@ -61,25 +62,12 @@ export default function Doc({ user }) {
           <input
             type="text"
             name={name}
+            value={name}
             onChange={(e) => setName(e.target.value)}
           />
           <TextEditor handleSaveDoc={handleSaveDoc} content={content} setContent={setContent} name={name}/>
           <button type="submit">Save</button>
         </form>
-        <div>
-          <h3>All Docs:</h3>
-          <Card style={{ width: "18rem" }}>
-            <Card.Body>
-              <Card.Title>{name}</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">
-                {/* Words: {content.split(" ").length} */}
-              </Card.Subtitle>
-              {/* <Card.Text>{content}</Card.Text> */}
-              <Card.Link>Continue Doc</Card.Link>
-              <Card.Link>Delete</Card.Link>
-            </Card.Body>
-          </Card>
-        </div>
       </div>
     </main>
   );

@@ -7,6 +7,8 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 import { MdDarkMode } from "react-icons/md";
+import { FaSearch } from "react-icons/fa";
+
 
 // CSS
 import "../../pages/App/App.css";

@@ -1,55 +1,90 @@
-import {useCallback, useState, useEffect, React}  from 'react'
-import Quill from "quill"
-import "quill/dist/quill.snow.css"
-import './TextEditor.css'
+import { useCallback, useState, useEffect, React } from "react";
+import Quill from "quill";
+import "quill/dist/quill.snow.css";
+import "./TextEditor.css";
+
+// websocket:
+import { io } from "socket.io-client";
+
+
 
 import * as docsAPI from "../../utilities/docs-api";
 
 const TOOLBAR_OPTIONS = [
-    [{ header: [1, 2, 3, 4, 5, 6, false] }],
-    [{ font: [] }],
-    [{ list: "ordered" }, { list: "bullet" }],
-    ["bold", "italic", "underline"],
-    [{ color: [] }, { background: [] }],
-    [{ script: "sub" }, { script: "super" }],
-    [{ align: [] }],
-    ["image", "blockquote", "code-block"],
-    ["clean"],
-  ]
+  [{ header: [1, 2, 3, 4, 5, 6, false] }],
+  [{ font: [] }],
+  [{ list: "ordered" }, { list: "bullet" }],
+  ["bold", "italic", "underline"],
+  [{ color: [] }, { background: [] }],
+  [{ script: "sub" }, { script: "super" }],
+  [{ align: [] }],
+  ["image", "blockquote", "code-block"],
+  ["clean"],
+];
 
+export default function TextEditor({ handleSaveDoc, setContent, content }) {
+  const [quill, setQuill] = useState();
+  const [socket, setSocket] = useState();
 
-export default function TextEditor({handleSaveDoc, setContent, content}) {
-    const [quill, setQuill] = useState()
+  // UseEffect for connecting to socket
+  useEffect(() => {
+    const s = io("http://localhost:3002");
+    setSocket(s);
+    console.log(s);
 
+    return () => {
+      s.disconnect();
+    };
+  }, []);
 
-    useEffect(() => {
-        if (quill == null) return
-        const handler = (delta, oldDelta, source) => {
-            setContent(delta)
-            console.log(content)
-            handleSaveDoc(content)
-        }
-        quill.on("text-change", handler)
+  // UseEffect for sending changes to the server
+  useEffect(() => {
+    if (socket == null || quill == null) return;
 
-        return () => {
-            quill.off("text-change", handler)
-        }
-    }, [quill])
+    const handler = (delta, oldDelta, source) => {
+      if (source !== "user") return;
+      socket.emit("emit-changes", delta);
+    };
 
-    const containerRef = useCallback((container) => {
-        const editor = document.createElement("div")
-        if (container == null) return
-        container.innerHTML = ''
-        container.append(editor)
-        const q = new Quill(editor, {theme: "snow", modules: { toolbar: TOOLBAR_OPTIONS}})
-        setQuill(q)
-    
-        return () => {
-            containerRef.innerHTML = ""
-        }
-    }, [])
+    quill.on("text-change", handler);
+
+    return () => {
+      quill.off("text-change", handler);
+    };
+  }, [socket, quill]);
+
+  // UseEffect for receiving changes to the server
+  useEffect(() => {
+    if (socket == null || quill == null) return;
+    const handler = (delta) => {
+      quill.updateContents(delta);
+    };
+    socket.on("receive-changes", handler);
+
+    return () => {
+      socket.off("receive-changes", handler);
+    };
+  }, [socket, quill]);
+
+  const containerRef = useCallback((container) => {
+    if (container == null) return;
+    container.innerHTML = "";
+    const editor = document.createElement("div");
+    container.append(editor);
+    const q = new Quill(editor, {
+      theme: "snow",
+      modules: { toolbar: TOOLBAR_OPTIONS },
+    });
+    setQuill(q);
+
+    return () => {
+      containerRef.innerHTML = "";
+    };
+  }, []);
 
   return (
-    <div className='TextEditor-container' ref={containerRef}>TextEditor</div>
-  )
+    <div className="TextEditor-container" ref={containerRef}>
+      TextEditor
+    </div>
+  );
 }
