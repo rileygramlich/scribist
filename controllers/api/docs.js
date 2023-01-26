@@ -72,7 +72,6 @@ async function updateDoc(req, res) {
     console.log(req.body.content);
     const doc = await Doc.findByIdAndUpdate(req.params.docId, {
       name: req.body.name,
-      content: req.body.content,
     });
     console.log(doc);
     res.json(doc);

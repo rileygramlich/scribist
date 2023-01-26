@@ -1,12 +1,12 @@
 import { useCallback, useState, useEffect, React } from "react";
+import { useParams } from "react-router-dom";
+
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
 import "./TextEditor.css";
 
 // websocket:
 import { io } from "socket.io-client";
-
-
 
 import * as docsAPI from "../../utilities/docs-api";
 
@@ -22,9 +22,21 @@ const TOOLBAR_OPTIONS = [
   ["clean"],
 ];
 
-export default function TextEditor({ handleSaveDoc, setContent, content }) {
+export default function TextEditor({name, setName}) {
   const [quill, setQuill] = useState();
   const [socket, setSocket] = useState();
+  const { docId } = useParams();
+
+  useEffect(() => {
+    if (socket == null || quill == null) return;
+    socket.once("load-doc", (doc) => {
+      quill.setContents(doc);
+      quill.enable();
+      console.log(name)
+    });
+
+    socket.emit("get-doc", docId);
+  }, [socket, quill, docId]);
 
   // UseEffect for connecting to socket
   useEffect(() => {
@@ -36,6 +48,18 @@ export default function TextEditor({ handleSaveDoc, setContent, content }) {
       s.disconnect();
     };
   }, []);
+
+  // UseEffect for saving changes to DB
+  useEffect(() => {
+    if (socket == null || quill == null) return;
+    const interval = setInterval(() => {
+      console.log('saving doc to DB')
+      socket.emit('save-doc', quill.getContents())
+    }, 5000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [socket, quill]);
 
   // UseEffect for sending changes to the server
   useEffect(() => {
@@ -75,6 +99,8 @@ export default function TextEditor({ handleSaveDoc, setContent, content }) {
       theme: "snow",
       modules: { toolbar: TOOLBAR_OPTIONS },
     });
+    q.disable();
+    q.setText("Loading doc");
     setQuill(q);
 
     return () => {

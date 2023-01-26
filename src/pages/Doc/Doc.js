@@ -28,29 +28,35 @@ export default function Doc({ user }) {
       const doc = await docsAPI.getDoc(docId)
       console.log(doc)
       setName(doc.name)
-      setContent(doc.content)
-      console.log(name)
     }
-    console.log(docId)
     renderDoc()
   }, [])
 
 
   const docsRef = useRef([]);
 
-  async function handleSaveDoc(content) {
+  async function handleSaveDoc() {
     console.log("You are saving");
     console.log(name)
-    console.log(content)
-    await docsAPI.update(docId, name, content);
+    await docsAPI.update(docId, name);
   }
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      handleSaveDoc(content)
-    }, 50000)
-    return () => {clearInterval(interval)}
-  }, [content])
+
+  function handleNameChange(e) {
+    setName(e.target.value)
+    handleSaveDoc()
+  }
+  // function handleSave() {
+
+  // }
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     console.log('saving name')
+  //     handleSaveDoc(content)
+  //   }, 5000)
+  //   return () => {clearInterval(interval)}
+  // }, [name])
 
   return (
     <main className="Doc">
@@ -63,9 +69,9 @@ export default function Doc({ user }) {
             type="text"
             name={name}
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={handleNameChange}
           />
-          <TextEditor handleSaveDoc={handleSaveDoc} content={content} setContent={setContent} name={name}/>
+          <TextEditor setName={setName} name={name}/>
           <button type="submit">Save</button>
         </form>
       </div>
