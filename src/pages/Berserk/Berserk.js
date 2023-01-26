@@ -27,8 +27,10 @@ export default function Berserk() {
     // start timer
   }
 
-  function toggleBerserk() {
+  function handleDone(e) {
+    handleCopy(e)
     setBerserk(!berserk);
+    console.log(berserk)
   }
 
   function toggleTools() {
@@ -119,7 +121,7 @@ export default function Berserk() {
                   {typedCount} / {target} words
                 </div>
                 <div className="buttons"></div>
-                <button type="submit" className="finish">
+                <button type="submit" className="finish" onClick={handleDone}>
                   Done
                 </button>
                 <button className="pause" onClick={togglePause}>

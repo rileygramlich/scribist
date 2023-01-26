@@ -10,6 +10,7 @@
     box-shadow: 0 0 7px rgba(0, 0, 0, .7);
     background-color: var(--heading-color);
     border: none;
+    z-index: -1;
 }
 
 .TextEditor-container .ql-toolbar.ql-snow {
