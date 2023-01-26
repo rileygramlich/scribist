@@ -8,7 +8,7 @@ export async function create() {
 }
 
 export async function getDoc(docId) {
-  return sendRequest(`${BASE_URL}/${docId}`, 'GET', {docId});
+  return sendRequest(`${BASE_URL}/${docId}`, 'GET');
 }
 
 export async function update(docId, name, content) {

@@ -18,7 +18,21 @@ export default function Doc({ user }) {
   const [name, setName] = useState("");
   const [content, setContent] = useState({});
 
+  const nameRef = useRef()
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    async function renderDoc() {
+      const doc = await docsAPI.getDoc(docId)
+      console.log(doc)
+      setName(doc.name)
+      setContent(doc.content)
+      console.log(name)
+    }
+    console.log(docId)
+    renderDoc()
+  }, [])
 
 
   const docsRef = useRef([]);
@@ -50,9 +64,6 @@ export default function Doc({ user }) {
             onChange={(e) => setName(e.target.value)}
           />
           <TextEditor handleSaveDoc={handleSaveDoc} content={content} setContent={setContent} name={name}/>
-          <textarea name="content" id="" cols="70" rows="30">
-            ...
-          </textarea>
           <button type="submit">Save</button>
         </form>
         <div>

@@ -11,6 +11,7 @@ import NavBar from "../../components/NavBar/NavBar";
 import Number from "../../components/Number/Number";
 import Doc from "../Doc/Doc";
 import Berserk from "../Berserk/Berserk";
+import About from "../About/About";
 
 import * as docsAPI from "../../utilities/docs-api";
 
@@ -46,6 +47,7 @@ export default function App() {
               <Route path="/" element={<Home user={user} handleNewDoc={handleNewDoc}/>} />
               <Route path="/docs/:docId" element={<Doc user={user}/>} />
               <Route path="/berserk" element={<Berserk user={user} />} />
+              <Route path="/about" element={<About user={user}/>} />
               <Route path="/home/profile" element={<Profile />} />
               <Route path="/:num" element={<Number />} />
             </Routes>
