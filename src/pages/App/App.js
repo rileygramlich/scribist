@@ -51,16 +51,16 @@ export default function App() {
                 path="/"
                 element={<Home user={user} handleNewDoc={handleNewDoc} />}
               />
-              <Route path="/berserk" element={<Berserk />} />
-              <Route path="/about" element={<About />} />
+              <Route exact path="/berserk" element={<Berserk />} />
+              <Route exact path="/about" element={<About />} />
               <Route path="/docs/:docId" element={<Doc user={user} />} />
               <Route path="/*" element={<AuthPage setUser={setUser} />} />
             </Routes>
           </>
         ) : (
           <Routes>
-            <Route path="/berserk" element={<Berserk />} />
-            <Route path="/about" element={<About />} />
+            <Route exact path="/berserk" element={<Berserk />} />
+            <Route exact path="/about" element={<About />} />
             <Route path="/auth-page" element={<AuthPage setUser={setUser} />} />
             <Route path="/" element={<AuthPage setUser={setUser} />} />
             <Route
