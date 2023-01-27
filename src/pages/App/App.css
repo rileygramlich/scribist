@@ -26,6 +26,7 @@
 .App {
   text-align: center;
   min-height: 100vh;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .Home,
@@ -52,6 +53,14 @@ button {
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+input {
+  background-color: var(--heading-color);
+  color: var(--font-color);
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 
 

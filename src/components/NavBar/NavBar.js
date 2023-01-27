@@ -7,7 +7,6 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 import { MdDarkMode } from "react-icons/md";
-import { FaSearch } from "react-icons/fa";
 
 
 // CSS
@@ -15,7 +14,6 @@ import "../../pages/App/App.css";
 import "./NavBar.css";
 
 import * as userService from "../../utilities/users-service";
-import * as docsAPI from "../../utilities/docs-api"
 
 export default function NavBar({ user, setUser, toggleTheme, handleNewDoc }) {
 
@@ -33,7 +31,6 @@ export default function NavBar({ user, setUser, toggleTheme, handleNewDoc }) {
     setShow(false);
   }
 
-
   return (
     <Navbar className="Navbar" expand="lg" id="Nav">
       <Container className="container-fluid">
@@ -46,8 +43,8 @@ export default function NavBar({ user, setUser, toggleTheme, handleNewDoc }) {
         <MdDarkMode/>
         </button>
         <form action="" className="search">
-          <input type="text" name="search" placeholder="search ..." />
-          {/* Add search functionality */}
+          {/* <input type="text" name="search" placeholder="search ..." />
+          Add search functionality */}
         </form>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

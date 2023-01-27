@@ -69,6 +69,7 @@ app.get('/*', function(req, res) {
 
  // inside bin/www
  var server = http.createServer(app);
+
  
  // load and attach socket.io to http server
  var io = require('./io');

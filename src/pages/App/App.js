@@ -54,6 +54,7 @@ export default function App() {
               <Route path="/berserk" element={<Berserk />} />
               <Route path="/about" element={<About />} />
               <Route path="/docs/:docId" element={<Doc user={user} />} />
+              <Route path="/*" element={<AuthPage setUser={setUser} />} />
             </Routes>
           </>
         ) : (
@@ -66,6 +67,7 @@ export default function App() {
               path="/docs/:docId"
               element={<AuthPage setUser={setUser} />}
             />
+            <Route path="/*" element={<AuthPage setUser={setUser} />} />
           </Routes>
         )}
         <Footer />
