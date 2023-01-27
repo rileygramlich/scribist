@@ -34,6 +34,7 @@ export default function NavBar({ user, setUser, toggleTheme, handleNewDoc }) {
   return (
     <Navbar className="Navbar" expand="lg" id="Nav">
       <Container className="container-fluid">
+        <div>
         <Navbar.Brand className="logo-contain">
           <Link className="logo" to="/">
             Scribist
@@ -42,10 +43,12 @@ export default function NavBar({ user, setUser, toggleTheme, handleNewDoc }) {
         <button className="dark-toggle" onClick={toggleTheme}>
         <MdDarkMode/>
         </button>
+        </div>
         <form className="search">
           {/* <input type="text" name="search" placeholder="search ..." />
           Add search functionality */}
         </form>
+        <div>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="container-fluid">
@@ -95,6 +98,7 @@ export default function NavBar({ user, setUser, toggleTheme, handleNewDoc }) {
             )}
           </Nav>
         </Navbar.Collapse>
+        </div>
       </Container>
     </Navbar>
   );

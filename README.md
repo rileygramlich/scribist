@@ -2,7 +2,7 @@
 ### A writing app with editing features, note taking, Berserk Mode writing, todos, timer, and testing your typing speed.
 #### By [rileygramlich](https://github.com/rileygramlich)
 ---
-[Click to use Scribist!]()
+[Click to use Scribist!](https://scribist.herokuapp.com/)
 
 ## Description and Background Info:
 This utility app is built with the intention of helping people write.
@@ -10,15 +10,16 @@ This utility app is built with the intention of helping people write.
 ### Create and Edit Docs:
 Create new documents for writing stories, or essays, or anything. This doc editor autosaves your work every 2 seconds. Also, if you want to collaborate with a friend on the document, just shoot them the link and you can see each other's changes appear live.
 
-![gif of doc page]()
+![gif of doc page](./public/img/doc-dark.png)
+![gif of doc page](./public/img/doc-light.png)
 
-![]()
 
 ### Berserk Mode:
 The purpose of this feature is to encourage your to have a continuous flow of writing. Berserk mode allows you to set a word target and a timer for how long you have to write targeted amount of words.  The cool thing about this mode is that if you stop typing, it will start erasing your words! The buffer time before it's starts erasing is set to 2 seconds. So go berserk and don't stop writing!
 
 
-![gif of berserk mode]()
+![gif of berserk mode](./public/img/berserk-setup.png)
+![gif of berserk mode](./public/img/berserk.png)
 
 <!-- ### Typing Test:
 
@@ -26,9 +27,11 @@ The purpose of this feature is to encourage your to have a continuous flow of wr
 
 
 ## Screenshots:
-Of ..:
-![Screenshots]()
+Of Authorization Page:
+![Screenshots](./public/img/auth.png)
 
+Of All Docs Page:
+![Screenshots](./public/img/all-docs.png)
 
 
 ## Technologies Used:
@@ -42,7 +45,7 @@ The MERN (MongoDB, Express, Reactm Node.js) stack was used to develop this full-
 
 * [Node.js](https://nodejs.org/en/): used as the live server environment, to monitor server operations, and view the web-app in a browser when running nodemon.
 
-* [Google People API](https://console.cloud.google.com/): used as a third party API to make Oauthentication with Google possible and bring in Google user data.
+<!-- * [Google People API](https://console.cloud.google.com/): used as a third party API to make Oauthentication with Google possible and bring in Google user data. -->
 
 * Javascript: used constantly throughout the application to write functions and manipulate the data accordingly.
 
@@ -67,7 +70,11 @@ The MERN (MongoDB, Express, Reactm Node.js) stack was used to develop this full-
 ## Getting Started: 
 
 ### Demo:
-[Click to write your dream project now!]()
+[Click to write your dream project now!](https://scribist.herokuapp.com/)
 
 ## Next Steps: Planned future enhancements:
-1. IceBox Items here
+1. Add edit sections feature whereby you can drag and move a given section and it will re-render it on the Quill editor
+2. Add more consequences in Berserk Mode, for example have the screen turn crazy colors, or have it blast sounds at you.
+3. Sign in with Google Oauth, Github, or Facebook.
+4. Add ability to convert the doc various formats such as PDF, markdown, or html.
+5. Implement more on the about page 

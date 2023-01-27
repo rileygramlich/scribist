@@ -7,3 +7,9 @@ a {
     background-color: var(--primary-color);
     color: var(--font-color)
 }
+
+.container-fluid {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}

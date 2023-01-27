@@ -52,8 +52,7 @@
 
 #ql-picker-options-0, #ql-picker-options-1, #ql-picker-options-2 {
     background-color: var(--primary-color);
-    position: absolute;
-    z-index: 1;
+border: none;
 }
 
 span .ql-picker-item {
