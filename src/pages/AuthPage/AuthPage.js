@@ -14,7 +14,7 @@ export default function AuthPage({ setUser }) {
 
   return (
     <main className="AuthPage">
-      <button onClick={handleShow}>{showLogin ? "Don't have an account with us?" : "Already a user?"}</button>
+      <button className="user-butter" onClick={handleShow}>{showLogin ? "Don't have an account with us?" : "Already a user?"}</button>
       {showLogin ? (
         <LoginForm setUser={setUser} />
       ) : (

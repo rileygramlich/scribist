@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { signUp } from "../../utilities/users-service";
 
-
 export default class SignUpForm extends Component {
   state = {
     name: "",
@@ -10,7 +9,6 @@ export default class SignUpForm extends Component {
     confirm: "",
     error: "",
   };
-
 
   handleChange = (evt) => {
     console.log(this.setState);
@@ -30,11 +28,11 @@ export default class SignUpForm extends Component {
       delete formData.error;
       delete formData.confirm;
       delete formData.error;
-      // The promise returned by the signUp service method 
+      // The promise returned by the signUp service method
       // will resolve to the user object included in the
       // payload of the JSON Web Token (JWT)
       const user = await signUp(formData);
-      this.props.setUser(user)
+      this.props.setUser(user);
     } catch {
       // An error occurred
       this.setState({ error: "Sign Up Failed - Try Again" });
@@ -45,40 +43,48 @@ export default class SignUpForm extends Component {
     const disable = this.state.password !== this.state.confirm;
     return (
       <div>
-        <div className="form-container">
-          <form autoComplete="off" onSubmit={this.handleSubmit}>
-            <label>Name</label>
-            <input
-              type="text"
-              name="name"
-              value={this.state.name}
-              onChange={this.handleChange}
-              required
-            />
-            <label>Email</label>
-            <input
-              type="email"
-              name="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-              required
-            />
-            <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-              required
-            />
-            <label>Confirm</label>
-            <input
-              type="password"
-              name="confirm"
-              value={this.state.confirm}
-              onChange={this.handleChange}
-              required
-            />
+        <div >
+          <form className="form-container" autoComplete="off" onSubmit={this.handleSubmit}>
+            <div className="in">
+              <label>Name:</label>
+              <input
+                type="text"
+                name="name"
+                value={this.state.name}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+            <div className="in">
+              <label>Email:</label>
+              <input
+                type="email"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+            <div className="in">
+              <label>Password:</label>
+              <input
+                type="password"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
+            <div className="in">
+              <label>Confirm Password: </label>
+              <input
+                type="password"
+                name="confirm"
+                value={this.state.confirm}
+                onChange={this.handleChange}
+                required
+              />
+            </div>
             <button type="submit" disabled={disable}>
               SIGN UP
             </button>

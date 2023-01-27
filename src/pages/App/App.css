@@ -16,17 +16,17 @@
   --heading-color: #f4f4f4;
 }
 
-#dark, #light {
+#dark,
+#light {
   background-color: var(--bg-color);
   color: var(--font-color);
 }
-
 
 /* APP */
 .App {
   text-align: center;
   min-height: 100vh;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
 }
 
 .Home,
@@ -40,14 +40,14 @@
 }
 
 Link {
-  color: var(--font-color)
+  color: var(--font-color);
 }
 
 button {
   background-color: var(--primary-color);
   color: var(--font-color);
   border: 1px solid var(--primary-color);
-  border-radius: 30%;
+  border-radius: 5px;
 }
 
 .App-logo {
@@ -62,7 +62,6 @@ input {
   border-radius: 5px;
   margin-bottom: 10px;
 }
-
 
 /* NAVBAR */
 #Nav {
@@ -85,7 +84,7 @@ input {
 
 input {
   margin-left: 15px;
-  width:fit-content;
+  width: fit-content;
 }
 
 #basic-nav-dropdown {
@@ -94,7 +93,7 @@ input {
 
 .drop-contain {
   background-color: var(--bg-color);
-  color: var(--font-color)
+  color: var(--font-color);
 }
 
 .dropdown-menu {
@@ -106,7 +105,6 @@ input {
   justify-content: flex-end;
 }
 
-
 /* DOC PAGE */
 textarea {
   background-color: var(--heading-color);
@@ -114,11 +112,10 @@ textarea {
   border: none;
 }
 
-
 /* HOME PAGE */
 #new-doc-btn {
   background-color: var(--primary-color);
-  color: var(--font-color)
+  color: var(--font-color);
 }
 
 #doc-card {
