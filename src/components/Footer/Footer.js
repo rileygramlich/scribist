@@ -2,7 +2,6 @@ import React from "react";
 import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-
 import "./Footer.css";
 
 export default function Footer() {
@@ -17,59 +16,69 @@ export default function Footer() {
         </div>
         <ul className="social-icon">
           <li className="social-icon__item">
-            <a className="social-icon__link" href="#">
-              <ion-icon name="logo-facebook"></ion-icon>
-            </a>
+            <div className="social-icon__link"></div>
           </li>
           <li className="social-icon__item">
-          <a
-            className="social-icon__item"
-            href="https://github.com/rileygramlich"
-            target="_blank"
-          >
-            <FaGithub />
-          </a>
+            <div className="social-icon__item">
+              <Link
+                rel="opener"
+                target="_blank"
+                to="https://www.linkedin.com/in/rileygramlich/"
+              >
+                <FaGithub />
+              </Link>
+            </div>
           </li>
           <li className="social-icon__item">
-          <a
-            className="social-icon__item"
-            href="https://www.linkedin.com/in/rileygramlich/"
-            target="_blank"
-          >
-            <FaLinkedin />
-            <i className="fa-regular fa-house"></i>
-          </a>
+            <div className="social-icon__item">
+              <Link
+                rel="opener"
+                target="_blank"
+                to="https://www.linkedin.com/in/rileygramlich/"
+              >
+                <FaLinkedin />
+              </Link>
+              <i className="fa-regular fa-house"></i>
+            </div>
           </li>
           <li className="social-icon__item">
-          <a
-            className="social-icon__item"
-            href="https://twitter.com/rileygramlich"
-            target="_blank"
-          >
-            <FaTwitter />
-          </a>
+            <div className="social-icon__item">
+              <Link
+                rel="opener"
+                target="_blank"
+                to="https://twitter.com/rileygramlich"
+              >
+                <FaTwitter />
+              </Link>
+            </div>
           </li>
         </ul>
         <ul className="menu">
           <li className="menu__item">
-            <a className="menu__link" href="#">
-                <Link to="/" >Home</Link>
-            </a>
+            <div className="menu__link">
+              <Link to="/">Home</Link>
+            </div>
           </li>
           <li className="menu__item">
-            <a className="menu__link" href="#">
-            <Link to="/berserk">Berserk</Link>
-            </a>
+            <div className="menu__link">
+              <Link to="/berserk">Berserk</Link>
+            </div>
           </li>
           <li className="menu__item">
-            <a className="menu__link" href="#">
-                <Link to="/about" >About</Link>
-            </a>
+            <div className="menu__link">
+              <Link to="/about">About</Link>
+            </div>
           </li>
           <li className="menu__item">
-            <a className="menu__link" target="_blank" href="https://rileygramlich.github.io/riley-gramlich-portfolio/">
-              My Portfolio
-            </a>
+            <div className="menu__link" target="_blank">
+              <Link
+                rel="opener"
+                target="_blank"
+                to="https://rileygramlich.github.io/riley-gramlich-portfolio/"
+              >
+                My Portfolio
+              </Link>
+            </div>
           </li>
         </ul>
         <p> &copy; 2023 Scribist | Designed & Developed by Riley Gramlich</p>

@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useRef, useContext, useEffect } from "react";
+import { Navigator } from "react-router-dom";
 import Timer from "../../components/Timer/Timer";
 
 import { FaPause, FaPlay, FaCopy } from "react-icons/fa";
@@ -20,8 +20,6 @@ export default function Berserk() {
 
   const textAreaRef = useRef(null);
 
-  const navigate = useNavigate();
-
   function handleBerserkStart(e) {
     e.preventDefault();
     console.log("going berserk");
@@ -32,7 +30,7 @@ export default function Berserk() {
   function handleDone(e) {
     handleCopy(e)
     setBerserk(!berserk);
-    navigate("/docs")
+    console.log(berserk)
   }
 
   function toggleTools() {
