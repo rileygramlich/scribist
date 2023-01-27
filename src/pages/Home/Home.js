@@ -33,9 +33,9 @@ export default function Home({user, handleNewDoc}) {
       
   return (
     <main className="Home">
-      <h1 className="title">{user.name}'s Home Page</h1>
+      <h1 className="title">{user.name}'s Docs</h1>
       <div className="docs">
-        <Button id="new-doc-btn" type="submit" onClick={handleNewDoc}>
+        <Button className="new-doc-btn" type="submit" onClick={handleNewDoc}>
           New Doc
         </Button>
         <DocsList docs={docs} handleDelete={handleDelete}/>

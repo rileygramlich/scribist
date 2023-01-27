@@ -8,3 +8,9 @@
     flex-wrap: wrap;
     gap: 30px;
 }
+
+.continue-btn, .new-doc-btn, .delete-btn {
+    margin: 10px;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+}

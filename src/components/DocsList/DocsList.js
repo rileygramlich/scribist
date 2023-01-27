@@ -15,11 +15,11 @@ export default function DocsList({docs, handleDelete}) {
                 <Card.Text>
                   {/* {doc.content} */}
                 </Card.Text>
-                <button>Continue Doc</button>
+                <button className="continue-btn" >Continue Doc</button>
               </Link>
   
                 
-                <button onClick={(e) => handleDelete(doc._id)}>Delete</button>
+                <button className="delete-btn" onClick={(e) => handleDelete(doc._id)}>Delete</button>
               </Card.Body>
             </Card>
     ))

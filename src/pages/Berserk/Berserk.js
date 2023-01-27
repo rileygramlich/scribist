@@ -58,29 +58,6 @@ export default function Berserk() {
     setTypedCount(count);
   }
 
-  const initMins = Math.floor(time / 60);
-  const initSecs = time % 60;
-  const [minutes, setMinutes] = useState(initMins);
-  const [seconds, setSeconds] = useState(initSecs);
-
-  useEffect(() => {
-    let myInterval = setInterval(() => {
-      if ((seconds > -1800) && (!isPaused)) {
-        setSeconds(seconds - 1);
-      }
-      if (seconds === 0) {
-        if (minutes === 0) {
-        } else {
-          setMinutes(minutes - 1);
-          setSeconds(59);
-        }
-      }
-    }, 1000);
-    return () => {
-      clearInterval(myInterval);
-    };
-  });
-
   useEffect(() => {
     const interval = setInterval(() => {
       if (!isPaused) {
