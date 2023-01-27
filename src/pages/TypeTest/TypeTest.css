@@ -1,37 +1,12 @@
-.berserk-form {
-    border: 1px solid var(--heading-color);
-    border-radius: 20px;
-    background-color: var(--heading-color);
-    min-height: 50vh;
-    margin-inline: 5vw;
+.TypeTest {
     display: flex;
-    justify-content: space-evenly;
-}
-
-.duration-contain, .target-contain {
-    display: flex;
-    gap: 30px
-}
-
-#time {
-    min-width: 50vw;
-}
-
-
-.berserk-tools {
-    display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 5vw;
-}
-
-.tool-bar-contain {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    align-content: center;
+    text-align: center;
     gap: 20px;
 }
 
-.typed {
-   
+.quote, .test-input, .new-quote, .start-btn, .finish-btn {
+    margin-inline: 20vw;
 }

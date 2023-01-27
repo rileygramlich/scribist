@@ -9,6 +9,7 @@ import AuthPage from "../AuthPage/AuthPage";
 import NavBar from "../../components/NavBar/NavBar";
 import Doc from "../Doc/Doc";
 import Berserk from "../Berserk/Berserk";
+import TypeTest from "../TypeTest/TypeTest";
 import About from "../About/About";
 import Footer from "../../components/Footer/Footer";
 
@@ -52,6 +53,7 @@ export default function App() {
                 element={<Home user={user} handleNewDoc={handleNewDoc} />}
               />
               <Route exact path="/berserk" element={<Berserk />} />
+              <Route exact path="/typetest" element={<TypeTest />} />
               <Route exact path="/about" element={<About />} />
               <Route path="/docs/:docId" element={<Doc user={user} />} />
               <Route path="/*" element={<AuthPage setUser={setUser} />} />
@@ -60,6 +62,7 @@ export default function App() {
         ) : (
           <Routes>
             <Route exact path="/berserk" element={<Berserk />} />
+            <Route exact path="/typetest" element={<TypeTest />} />
             <Route exact path="/about" element={<About />} />
             <Route path="/auth-page" element={<AuthPage setUser={setUser} />} />
             <Route path="/" element={<AuthPage setUser={setUser} />} />

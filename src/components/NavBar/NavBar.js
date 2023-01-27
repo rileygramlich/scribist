@@ -72,7 +72,7 @@ export default function NavBar({ user, setUser, toggleTheme, handleNewDoc }) {
                   <Link to="/berserk">Berserk Mode</Link>
                 </NavDropdown.Item>
                 <NavDropdown.Item className="drop-item">
-                  <Link to="/type-test">Test Typing Speed</Link>
+                  <Link to="/typetest">Test Typing Speed</Link>
                 </NavDropdown.Item>
               </div>
             </NavDropdown>

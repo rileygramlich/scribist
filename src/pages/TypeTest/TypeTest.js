@@ -1,173 +1,95 @@
-import React, { useState, useRef, useContext, useEffect } from "react";
-import { Navigator } from "react-router-dom";
-import Timer from "../../components/Timer/Timer";
-
-import { FaPause, FaPlay, FaCopy } from "react-icons/fa";
-
+import React, { useState, useEffect } from "react";
 // CSS
-import "./Berserk.css";
+import "./TypeTest.css";
 
-export default function Berserk() {
-  const [berserk, setBerserk] = useState(false);
-  const [time, setTime] = useState(1800);
-  const [target, setTarget] = useState(1000);
+const ROOT_URL = "https://philosophy-quotes-api.glitch.me/quotes";
 
+export default function TypeTest() {
+  const [quote, setQuote] = useState({});
   const [typed, setTyped] = useState("");
-  const [typedCount, setTypedCount] = useState(0);
-
-  const [isPaused, setIsPaused] = useState(false);
-  const [showTools, setShowTools] = useState(true);
-
-  const textAreaRef = useRef(null);
-
-  function handleBerserkStart(e) {
-    e.preventDefault();
-    console.log("going berserk");
-    setBerserk(!false);
-    // start timer
-  }
-
-  function handleDone(e) {
-    handleCopy(e)
-    setBerserk(!berserk);
-    console.log(berserk)
-  }
-
-  function toggleTools() {
-    console.log("toggling tools");
-    setShowTools(!showTools);
-  }
-
-  function togglePause() {
-    console.log("toggling pause");
-    setIsPaused(!isPaused);
-  }
-
-  function handleCopy(e) {
-    textAreaRef.current.select();
-    document.execCommand("copy");
-    e.target.focus();
-    console.log("text copied");
-  }
-
-  function handleTextChange(newValue) {
-    setTyped(newValue);
-    const count = typed.split(" ").filter((word) => word !== "").length;
-    setTypedCount(count);
-  }
-
-  const initMins = Math.floor(time / 60);
-  const initSecs = time % 60;
-  const [minutes, setMinutes] = useState(initMins);
-  const [seconds, setSeconds] = useState(initSecs);
+  const [testOn, setTestOn] = useState(false);
+  const [timerOn, setTimerOn] = useState(true);
+  const [time, setTime] = useState(0);
+  const [wpm, setWpm] = useState(0);
 
   useEffect(() => {
-    let myInterval = setInterval(() => {
-      if ((seconds > -1800) && (!isPaused)) {
-        setSeconds(seconds - 1);
-      }
-      if (seconds === 0) {
-        if (minutes === 0) {
-        } else {
-          setMinutes(minutes - 1);
-          setSeconds(59);
-        }
-      }
+    async function renderQuote() {
+      const quotes = await fetch(ROOT_URL).then((res) => res.json());
+      const q = await quotes[Math.floor(Math.random() * (127 - 1) + 1)];
+      setQuote(q);
+      console.log(quote);
+    }
+    renderQuote();
+  }, []);
+
+  useEffect(() => {
+    if (!timerOn) return;
+    const myInterval = setInterval(() => {
+      if (timerOn)
+      setTime((time) => time + 1);
+      console.log(time);
     }, 1000);
     return () => {
       clearInterval(myInterval);
     };
-  });
+  }, [setTimerOn]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (!isPaused) {
-        handleTextChange(typed.slice(0, -5));
-      }
-    }, 2000);
-    return () => clearInterval(interval);
-  }, [typed]);
+  async function handleSubmit(e) {
+    e.preventDefault();
+    console.log("getting quote");
+    const quotes = await fetch(ROOT_URL).then((res) => res.json());
+    const q = await quotes[Math.floor(Math.random() * (127 - 1) + 1)];
+    setQuote(q);
+    console.log(quote);
+  }
+
+  function handleTestStart(e) {
+    e.preventDefault();
+    console.log("start");
+    setTestOn(true);
+  }
+
+  function handleDoneTest() {
+    console.log("getting test results");
+    // const count = typed.split(" ").filter((word) => word !== "").length;
+    // const wperminute = count / (time / 60);
+    // setWpm(wperminute);
+    setTimerOn(!timerOn)
+    console.log(timerOn)
+  }
 
   return (
-    <div className="Berserk">
-      <h1 className="title">Go Berserk.</h1>
-      {berserk ? (
-        <div id="berserking">
-          <textarea
-            name="berserk-text"
-            id=""
-            cols="100"
-            rows="25"
-            placeholder="Go berserk here..."
-            value={typed}
-            ref={textAreaRef}
-            onChange={(e) => handleTextChange(e.target.value)}
-          ></textarea>
-          <div className="berserk-tools">
-            <button className="show-controls" onClick={toggleTools}>
-              {showTools ? "Hide" : "Show"}
-            </button>
-            <Timer
-              time={time}
-              showTools={showTools}
-              isPaused={isPaused}
-              setIsPaused={setIsPaused}
-              minutes={minutes}
-              seconds={seconds}
-            />
-            {showTools ? (
-              <div className="tool-bar-contain">
-                <div className="typed">
-                  {typedCount} / {target} words
-                </div>
-                <div className="buttons"></div>
-                <button type="submit" className="finish" onClick={handleDone}>
-                  Done
-                </button>
-                <button className="pause" onClick={togglePause}>
-                  {isPaused ? <FaPlay /> : <FaPause />}
-                </button>
-                <button className="copy" onClick={handleCopy}>
-                  <FaCopy/>
-                </button>
-              </div>
-            ) : (
-              <p>Keep on berserkin'!</p>
-            )}
-          </div>
-        </div>
-      ) : (
-        <form className="berserk-form" onSubmit={handleBerserkStart}>
-          <div className="time-contain">
-            <h3>Time to write: </h3>
-            <input
-              type="range"
-              name="seconds"
-              id="time"
-              min="60"
-              max="7200"
-              onChange={(e) => setTime(e.target.value)}
-            />
-            <p>
-              {Math.floor(time / 60)} minutes {time % 60} seconds
-            </p>
-          </div>
-          <div className="target-contain">
-            <h3 className="target">Word Target: </h3>
-            <input
-              type="number"
-              name="target"
-              value={target}
-              id="word-target"
-              onChange={(e) => setTarget(e.target.value)}
-            />
-          </div>
-          <button type="submit" id="berserk-button">
-            Go Berserk and write {target} words in {Math.floor(time / 60)}{" "}
-            minutes
-          </button>
-        </form>
-      )}
+    <div className="TypeTest">
+      <h1 className="title">Test Typing Speed!</h1>
+      <p className="quote">"{quote.quote}"</p>
+      <p className="author">~ {quote.source}</p>
+      <button className="new-quote" type="submit" onClick={handleSubmit}>
+        Type New Quote
+      </button>
+
+      <button className="start-btn" onClick={handleTestStart}>
+        Start Test
+      </button>
+      <form action="" ></form>
+      <textarea
+        name="type"
+        id=""
+        cols="30"
+        rows="10"
+        className="test-input"
+        placeholder="Type quote here ..."
+        onChange={(e) => setTyped(e.target.value)}
+      ></textarea>
+      <button className="finish-btn" onClick={handleDoneTest}>
+        Finish Test
+      </button>
+      <p>{time}</p>
+      
+      <h5>
+        You typed {typed.split(" ").filter((word) => word !== "").length} words
+        in {Math.floor(time / 60)} mins and {time % 60} seconds.
+      </h5>
+      <h5>That's {typed.split(" ").filter((word) => word !== "").length / (time/60)} wpm</h5>
     </div>
   );
 }
