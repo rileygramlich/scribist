@@ -23,20 +23,10 @@ app.use(express.json());
 
 // Cors access
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000/"); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
-
-// Google Oauth
-// app.use(cookieParser());
-// app.use(session({
-//   secret: 'SCRIBIST!',
-//   resave: false,
-//   saveUninitialized: true
-// }));
-// app.use(passport.initialize());
-// app.use(passport.session());
 
 
 // Configure both serve-favicon & static middleware

@@ -42,7 +42,7 @@ export default function NavBar({ user, setUser, toggleTheme, handleNewDoc }) {
         <button className="dark-toggle" onClick={toggleTheme}>
         <MdDarkMode/>
         </button>
-        <form action="" className="search">
+        <form className="search">
           {/* <input type="text" name="search" placeholder="search ..." />
           Add search functionality */}
         </form>
@@ -59,9 +59,7 @@ export default function NavBar({ user, setUser, toggleTheme, handleNewDoc }) {
             >
               <div className="drop-contain">
                 <NavDropdown.Item className="drop-item">
-                  <Link className="drop-item">
                     <button className='new-doc-btn' onClick={handleNewDoc}>New Doc</button>
-                  </Link>
                 </NavDropdown.Item>
                 {/* <NavDropdown.Item className="drop-item">
                   <Link to="/notes/new">New Note</Link>
@@ -80,7 +78,7 @@ export default function NavBar({ user, setUser, toggleTheme, handleNewDoc }) {
                   <div>User: {user.name}</div>
                   <div>Email: {user.email}</div>
                 <NavDropdown.Divider />
-                  <NavDropdown.Item href="">
+                  <NavDropdown.Item >
                     <Link to="/user/logout" onClick={handleLogout}>
                       Logout
                     </Link>
@@ -89,7 +87,7 @@ export default function NavBar({ user, setUser, toggleTheme, handleNewDoc }) {
               </NavDropdown>
             ) : (
               <NavDropdown title="User" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.2">
+                <NavDropdown.Item >
                   <Link to="/">Login</Link>
                 </NavDropdown.Item>
               </NavDropdown>
