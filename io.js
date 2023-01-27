@@ -3,7 +3,7 @@ const Doc = require("./models/doc");
 
 const io = require("socket.io")(3002, {
   cors: {
-    origin: "http://localhost:3001",
+    origin: "https://scribist.herokuapp.com",
     methods: ["GET", "POST"],
   },
 });
