@@ -1,30 +1,21 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
-export default function Timer({ time, showTools, isPaused, minutes, seconds }) {
-  const initMins = Math.floor(time / 60);
-  const initSecs = time % 60;
-  const [minutes, setMinutes] = useState(initMins);
-  const [seconds, setSeconds] = useState(initSecs);
+export default function Timer({ time, showTools, isPaused, timerMode }) {
+  const initSecs = time
+  const [timer, setTimer] = useState(initSecs);
 
   useEffect(() => {
-    let myInterval = setInterval(() => {
-      if ((seconds > -1800) && (!isPaused)) {
-        setSeconds(seconds - 1);
-      }
-      if (seconds === 0) {
-        if (minutes === 0) {
-        } else {
-          setMinutes(minutes - 1);
-          setSeconds(59);
-        }
+    if (isPaused) return;
+    if (!timerMode) return;
+    const myInterval = setInterval(() => {
+      if (timer > -1800 && !isPaused) {
+        setTimer((timer) => timer - 1);
       }
     }, 1000);
     return () => {
       clearInterval(myInterval);
     };
-  });
-
+  }, [isPaused]);
 
   return (
     <div className="Timer">
@@ -32,7 +23,7 @@ export default function Timer({ time, showTools, isPaused, minutes, seconds }) {
         <div className="timer">
           <h3>
             {" "}
-            {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+            {Math.floor(timer / 60)}:{timer % 60 < 10 ? `0${timer % 60 }` : timer % 60 }
           </h3>
         </div>
       ) : (

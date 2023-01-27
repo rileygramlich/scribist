@@ -11,6 +11,7 @@ export default function Berserk() {
   const [berserk, setBerserk] = useState(false);
   const [time, setTime] = useState(1800);
   const [target, setTarget] = useState(1000);
+  const [timerMode, setTimerMode] = useState(false);
 
   const [typed, setTyped] = useState("");
   const [typedCount, setTypedCount] = useState(0);
@@ -25,14 +26,15 @@ export default function Berserk() {
   function handleBerserkStart(e) {
     e.preventDefault();
     console.log("going berserk");
+    console.log(timerMode)
     setBerserk(!false);
     // start timer
   }
 
   function handleDone(e) {
-    handleCopy(e)
+    handleCopy(e);
     setBerserk(!berserk);
-    navigate("/docs")
+    navigate("/docs");
   }
 
   function toggleTools() {
@@ -43,6 +45,7 @@ export default function Berserk() {
   function togglePause() {
     console.log("toggling pause");
     setIsPaused(!isPaused);
+    console.log(isPaused)
   }
 
   function handleCopy(e) {
@@ -59,6 +62,8 @@ export default function Berserk() {
   }
 
   useEffect(() => {
+    // if (timerMode) return
+    console.log('timing')
     const interval = setInterval(() => {
       if (!isPaused) {
         handleTextChange(typed.slice(0, -5));
@@ -91,8 +96,7 @@ export default function Berserk() {
               showTools={showTools}
               isPaused={isPaused}
               setIsPaused={setIsPaused}
-              minutes={minutes}
-              seconds={seconds}
+              timerMode={timerMode}
             />
             {showTools ? (
               <div className="tool-bar-contain">
@@ -107,7 +111,7 @@ export default function Berserk() {
                   {isPaused ? <FaPlay /> : <FaPause />}
                 </button>
                 <button className="copy" onClick={handleCopy}>
-                  <FaCopy/>
+                  <FaCopy />
                 </button>
               </div>
             ) : (
@@ -139,6 +143,15 @@ export default function Berserk() {
               value={target}
               id="word-target"
               onChange={(e) => setTarget(e.target.value)}
+            />
+          </div>
+          <div className="timer-mode-contain">
+            <h3 className="mode">Timer mode? </h3>
+            <input
+              type="checkbox"
+              name="mode"
+              value={timerMode}
+              onChange={(e) => setTimerMode(e.target.value)}
             />
           </div>
           <button type="submit" id="berserk-button">
