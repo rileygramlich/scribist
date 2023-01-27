@@ -77,4 +77,9 @@ The MERN (MongoDB, Express, Reactm Node.js) stack was used to develop this full-
 2. Add more consequences in Berserk Mode, for example have the screen turn crazy colors, or have it blast sounds at you.
 3. Sign in with Google Oauth, Github, or Facebook.
 4. Add ability to convert the doc various formats such as PDF, markdown, or html.
-5. Implement more on the about page 
+5. Implement more on the about page and add donation option using Stripe.
+6. Style more and add animations and use a library like framer to have seamless popup interactivity.
+7. Add Ability to see more data about docs (words typed, created date, last updated, etc).
+8. Add search option in navbar to find docs faster.
+9. Add note-taking feature that can do todos (without all the text editing).
+10. Integrate ChatGPT API to aid for writing prompts and generating outlines.
