@@ -2,3 +2,7 @@ a {
     text-decoration: none;
     color: var(--font-color)
 }
+
+.dropdown-menu {
+    background-color: var(--primary-color)
+}

@@ -96,11 +96,6 @@ input {
   color: var(--font-color);
 }
 
-.drop-contain {
-  background-color: var(--bg-color);
-  color: var(--font-color);
-}
-
 .dropdown-menu {
   background-color: var(--heading-color);
 }
