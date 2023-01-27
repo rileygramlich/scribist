@@ -13,12 +13,12 @@ import * as docsAPI from "../../utilities/docs-api";
 const TOOLBAR_OPTIONS = [
   [{ header: [1, 2, 3, 4, 5, 6, false] }],
   [{ font: [] }],
+  [{ 'size': ['small', false, 'large', 'huge'] }],
   [{ list: "ordered" }, { list: "bullet" }],
   ["bold", "italic", "underline"],
   [{ color: [] }, { background: [] }],
-  [{ script: "sub" }, { script: "super" }],
   [{ align: [] }],
-  ["image", "blockquote", "code-block"],
+  ["blockquote", "code-block"],
   ["clean"],
 ];
 

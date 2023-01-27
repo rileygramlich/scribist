@@ -21,3 +21,10 @@ form {
     flex-direction: column;
     align-items: center;
 }
+
+.doc-name {
+    background-color: var(--bg-color);
+    text-align: center;
+    font-size: 40px;
+    margin: 17px;
+}

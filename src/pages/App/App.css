@@ -39,6 +39,10 @@
   min-height: 100vh;
 }
 
+.Doc {
+  min-height: fit-content;
+}
+
 Link {
   color: var(--font-color);
 }

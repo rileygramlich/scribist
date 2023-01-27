@@ -1,8 +1,15 @@
-.ql-container {
+.page-container {
+    min-height: fit-content;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.ql-container.ql-snow {
     border: none;
 }
 
-.TextEditor-container .ql-editor {
+.ql-editor {
     width: 8.5in;
     min-height: 11in;
     padding: 1in;
@@ -10,14 +17,18 @@
     box-shadow: 0 0 7px rgba(0, 0, 0, .7);
     background-color: var(--heading-color);
     border: none;
-    z-index: -1;
+    position: relative;
+
 }
 
-.TextEditor-container .ql-toolbar.ql-snow {
+.ql-toolbar.ql-snow {
     position: sticky;
+    align-content: center;
     background-color: var(--heading-color);
     box-shadow: 0 0 7px rgba(0, 0, 0, .7);
     margin: 16px;
+    margin-bottom: 20vh;
+    width: 8.5in;
     color: var(--font-color);
     border: none;
 }
@@ -32,4 +43,9 @@
 
 .ql-snow .ql-picker {
     color: var(--font-color)
+}
+
+#ql-picker-options-0, #ql-picker-options-1, #ql-picker-options-2 {
+    background-color: var(--bg-color);
+    position: absolute;
 }
