@@ -62,7 +62,7 @@ export default function Berserk() {
   }
 
   useEffect(() => {
-    // if (timerMode) return
+    if (timerMode) return
     console.log('timing')
     const interval = setInterval(() => {
       if (!isPaused) {
