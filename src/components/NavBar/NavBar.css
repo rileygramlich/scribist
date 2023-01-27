@@ -4,5 +4,6 @@ a {
 }
 
 .dropdown-menu {
-    background-color: var(--primary-color)
+    background-color: var(--primary-color);
+    color: var(--font-color)
 }

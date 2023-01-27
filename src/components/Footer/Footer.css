@@ -74,3 +74,10 @@
   font-size: 1rem;
   font-weight: 300;
 }
+
+.footer {
+  position: absolute;
+  bottom: -50px;
+  width: 100%;
+  min-height: 50;          
+}

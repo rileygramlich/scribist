@@ -8,8 +8,6 @@ import "./TextEditor.css";
 // websocket:
 import { io } from "socket.io-client";
 
-import * as docsAPI from "../../utilities/docs-api";
-
 const TOOLBAR_OPTIONS = [
   [{ header: [1, 2, 3, 4, 5, 6, false] }],
   [{ font: [] }],
