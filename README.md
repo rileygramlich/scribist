@@ -8,18 +8,21 @@
 This utility app is built with the intention of helping people write.
 
 ### Create and Edit Docs:
+Create new documents for writing stories, or essays, or anything. This doc editor autosaves your work every 2 seconds. Also, if you want to collaborate with a friend on the document, just shoot them the link and you can see each other's changes appear live.
 
 ![gif of doc page]()
 
 ![]()
 
 ### Berserk Mode:
+The purpose of this feature is to encourage your to have a continuous flow of writing. Berserk mode allows you to set a word target and a timer for how long you have to write targeted amount of words.  The cool thing about this mode is that if you stop typing, it will start erasing your words! The buffer time before it's starts erasing is set to 2 seconds. So go berserk and don't stop writing!
+
 
 ![gif of berserk mode]()
 
-### Typing Test:
+<!-- ### Typing Test:
 
-![gif of type test]()
+![gif of type test]() -->
 
 
 ## Screenshots:
