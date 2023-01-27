@@ -6,9 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Home from "../Home/Home";
 import AuthPage from "../AuthPage/AuthPage";
-import Profile from "../Profile/Profile";
 import NavBar from "../../components/NavBar/NavBar";
-import Number from "../../components/Number/Number";
 import Doc from "../Doc/Doc";
 import Berserk from "../Berserk/Berserk";
 import About from "../About/About";
