@@ -13,7 +13,7 @@ export default async function sendRequest(url, method = "GET", payload = null) {
   if (token) {
     // Great use case for the Logical OR assignment operator
     // We want to set it to an empty object before the fetch
-    options.headers ||= {};
+    options.headers = options.headers || {};
     // Add token to an Authorization header
     // Prefacing with 'Bearer' is recommended in the HTTP specification
     options.headers.Authorization = `Bearer ${token}`;
