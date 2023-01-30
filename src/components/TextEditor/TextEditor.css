@@ -1,3 +1,8 @@
+*, *::before, *::after {
+ box-sizing: border-box;
+}
+
+
 .page-container {
     min-height: fit-content;
     display: flex;
@@ -12,8 +17,8 @@
 }
 
 .page-container .ql-editor {
-    width: 8.5in;
-    min-height: 11in;
+    width: 21cm;
+    min-height: 29.7cm;
     padding: 1in;
     margin: 16px;
     box-shadow: 0 0 7px rgba(0, 0, 0, .7);
@@ -33,7 +38,7 @@
     background-color: var(--heading-color);
     box-shadow: 0 0 7px rgba(0, 0, 0, .7);
     margin: 16px;
-    width: 8.5in;
+    width: 21cm;
     color: var(--font-color);
     border: none;
 }
@@ -55,7 +60,35 @@
 border: none;
 }
 
-span .ql-picker-item {
-    /* position: absolute;
-    z-index: 2; */
+.ql-snow.ql-toolbar button {
+    margin-inline: 0;
+}
+
+.ql-snow .ql-formats {
+    display: flex;
+    align-items: center;
+}
+
+
+
+
+/* Printing */
+@media print {
+    /* remove all other elements on page, Nav, footer, title, etc */
+    body {
+        background: none;
+    }
+
+    .container .ql-editor {
+        width: 16.5cm;
+        height: 22.86cm;
+        padding: 0;
+        margin: 0;
+        box-shadow: none;
+        align-self: flex-start;
+    }
+
+    .page-container .ql-toolbar {
+        display: none;
+    }
 }

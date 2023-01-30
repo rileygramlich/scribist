@@ -1,10 +1,9 @@
-const mongoose = require("mongoose");
 const Doc = require("./models/doc");
 
 
 const io = require("socket.io")(3002, {
   cors: {
-    origin: "https://scribist.herokuapp.com/",
+    origin: "https://scribist.herokuapp.com",
     methods: ["GET", "POST"],
   },
 });

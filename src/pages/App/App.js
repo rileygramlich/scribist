@@ -4,6 +4,8 @@ import { Routes, Route, useNavigate, Redirect } from "react-router-dom";
 import { getUser } from "../../utilities/users-service";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import "quill/dist/quill.snow.css";
+
 import Home from "../Home/Home";
 import AuthPage from "../AuthPage/AuthPage";
 import NavBar from "../../components/NavBar/NavBar";

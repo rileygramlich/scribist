@@ -1,15 +1,55 @@
 a {
-    text-decoration: none;
-    color: var(--font-color)
+  text-decoration: none;
+  color: var(--font-color);
 }
 
 .dropdown-menu {
-    background-color: var(--primary-color);
-    color: var(--font-color)
+  background-color: var(--primary-color);
+  color: var(--font-color);
 }
 
 .container-fluid {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.logo-n-button {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: bold;
+  color: var(--font-color);
+  text-decoration: none;
+}
+
+.dark-toggle {
+  background-color: var(--font-color);
+  color: var(--bg-color);
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  margin-right: 20px;
+  border: none;
+}
+
+input {
+  margin-left: 15px;
+  width: fit-content;
+}
+
+#basic-nav-dropdown {
+  color: var(--font-color);
+}
+
+.dropdown-menu {
+  background-color: var(--heading-color);
+}
+
+.navbar-nav {
+  display: flex;
+  justify-content: flex-end;
 }

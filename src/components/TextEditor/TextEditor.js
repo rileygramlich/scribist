@@ -2,7 +2,6 @@ import React, { useCallback, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import Quill from "quill";
-import "quill/dist/quill.snow.css";
 import "./TextEditor.css";
 
 // websocket:

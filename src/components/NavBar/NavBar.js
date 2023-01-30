@@ -34,7 +34,7 @@ export default function NavBar({ user, setUser, toggleTheme, handleNewDoc }) {
   return (
     <Navbar className="Navbar" expand="lg" id="Nav">
       <Container className="container-fluid">
-        <div>
+        <div className="logo-n-button">
         <Navbar.Brand className="logo-contain">
           <Link className="logo" to="/">
             Scribist

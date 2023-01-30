@@ -73,38 +73,6 @@ input {
   background-color: var(--heading-color);
 }
 
-.logo {
-  font-size: 25px;
-  font-weight: bold;
-  color: var(--font-color);
-  text-decoration: none;
-}
-
-.dark-toggle {
-  background-color: var(--font-color);
-  color: var(--bg-color);
-  border-radius: 80%;
-  margin-right: 20px;
-}
-
-input {
-  margin-left: 15px;
-  width: fit-content;
-}
-
-#basic-nav-dropdown {
-  color: var(--font-color);
-}
-
-.dropdown-menu {
-  background-color: var(--heading-color);
-}
-
-.navbar-nav {
-  display: flex;
-  justify-content: flex-end;
-}
-
 /* DOC PAGE */
 textarea {
   background-color: var(--heading-color);
