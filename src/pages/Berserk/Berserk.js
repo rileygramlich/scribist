@@ -26,7 +26,7 @@ export default function Berserk() {
   function handleBerserkStart(e) {
     e.preventDefault();
     console.log("going berserk");
-    console.log(timerMode)
+    console.log(timerMode);
     setBerserk(!false);
     // start timer
   }
@@ -45,7 +45,7 @@ export default function Berserk() {
   function togglePause() {
     console.log("toggling pause");
     setIsPaused(!isPaused);
-    console.log(isPaused)
+    console.log(isPaused);
   }
 
   function handleCopy(e) {
@@ -62,8 +62,8 @@ export default function Berserk() {
   }
 
   useEffect(() => {
-    if (timerMode) return
-    console.log('timing')
+    if (timerMode) return;
+    console.log("timing");
     const interval = setInterval(() => {
       if (!isPaused) {
         handleTextChange(typed.slice(0, -5));

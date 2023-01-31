@@ -50,7 +50,6 @@ export default function TextEditor({name, setName}) {
   useEffect(() => {
     if (socket == null || quill == null) return;
     const interval = setInterval(() => {
-      console.log('saving doc to DB')
       socket.emit('save-doc', quill.getContents())
     }, 5000);
     return () => {

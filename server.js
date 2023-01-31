@@ -17,13 +17,18 @@ require('./config/database');
 require('./config/passport');
 
 const app = express();
+const server = http.createServer(app);
+const io = require('./io');
+io.attach(server);
+
+
 
 app.use(logger('dev'));
 app.use(express.json());
 
 // Cors access
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000/"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
@@ -60,9 +65,6 @@ app.get('/*', function(req, res) {
 });
 
  // inside bin/www
- var server = http.createServer(app);
 
  
  // load and attach socket.io to http server
- var io = require('./io');
- io.attach(server);

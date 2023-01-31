@@ -1,6 +1,6 @@
 import "./App.css";
-import React, { createContext, useState, useContext, useParams } from "react";
-import { Routes, Route, useNavigate, Redirect } from "react-router-dom";
+import React, { createContext, useState } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { getUser } from "../../utilities/users-service";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -26,14 +26,11 @@ export default function App() {
   const navigate = useNavigate();
 
   function toggleTheme() {
-    console.log("changing theme");
     setTheme((curr) => (curr === "light" ? "dark" : "light"));
   }
 
   async function handleNewDoc() {
-    console.log("handling");
     const docId = await docsAPI.create();
-    console.log("redirecting:" + docId);
     navigate(`/docs/${docId}`);
     // await docsAPI.getDoc(docId)
   }

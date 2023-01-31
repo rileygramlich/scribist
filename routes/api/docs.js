@@ -5,10 +5,6 @@ const docsCtrl = require('../../controllers/api/docs');
 // Middleware functions
 const ensureLoggedIn = require('../../config/ensureLoggedIn');
 
-// READ: 
-// router.get('/check-token', ensureLoggedIn, docsCtrl.checkToken);
-
-
 // UPDATE:
 router.post('/create', docsCtrl.createDoc)
 router.post('/:docId/update', docsCtrl.updateDoc)
