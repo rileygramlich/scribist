@@ -72,7 +72,7 @@ The MERN (MongoDB, Express, Reactm Node.js) stack was used to develop this full-
 ### Demo:
 [Click to write your dream project now!](https://scribist.herokuapp.com/)
 
-## Next Steps: Planned future enhancements:
+## Planned future enhancements:
 1. Add edit sections feature whereby you can drag and move a given section and it will re-render it on the Quill editor
 2. Add more consequences in Berserk Mode, for example have the screen turn crazy colors, or have it blast sounds at you.
 3. Sign in with Google Oauth, Github, or Facebook.
