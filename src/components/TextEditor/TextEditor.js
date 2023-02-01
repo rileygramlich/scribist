@@ -29,7 +29,6 @@ export default function TextEditor({name, setName}) {
     socket.once("load-doc", (doc) => {
       quill.setContents(doc);
       quill.enable();
-      console.log(name)
     });
 
     socket.emit("get-doc", docId);

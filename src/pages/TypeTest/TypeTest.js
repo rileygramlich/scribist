@@ -25,7 +25,6 @@ export default function TypeTest() {
     if (!timerOn) return;
     const myInterval = setInterval(() => {
       if (timerOn) setTime((time) => time + 1);
-      console.log(time);
     }, 1000);
     return () => {
       clearInterval(myInterval);
@@ -34,7 +33,6 @@ export default function TypeTest() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log("getting quote");
     const quotes = await fetch(ROOT_URL).then((res) => res.json());
     const q = await quotes[Math.floor(Math.random() * (127 - 1) + 1)];
     setQuote(q);
