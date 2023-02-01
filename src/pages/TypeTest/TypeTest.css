@@ -16,7 +16,7 @@
     max-width: 90vw
 }
 
-button {
+.new-quote, .start-btn, .finish-btn {
     width: 25vw;
     height: 5vh;
     border-radius: 10px;
