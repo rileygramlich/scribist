@@ -1,11 +1,11 @@
 # Scribist
-### A writing app with editing features, note taking, Berserk Mode writing, todos, timer, and testing your typing speed.
+### A writing app with editing features, Berserk Mode writing, and testing your typing speed.
 #### By [rileygramlich](https://github.com/rileygramlich)
 ---
 [Click to use Scribist!](https://scribist.herokuapp.com/)
 
 ## Description and Background Info:
-This utility app is built with the intention of helping people write.
+This utility app is built with the intention of helping people write more, especially with Berserk mode which allows you to pressure yourself with a word target and a timer set to reach that target.
 
 ### Create and Edit Docs:
 Create new documents for writing stories, or essays, or anything. This doc editor autosaves your work every 2 seconds. Also, if you want to collaborate with a friend on the document, just shoot them the link and you can see each other's changes appear live.
@@ -35,7 +35,7 @@ Of All Docs Page:
 
 
 ## Technologies Used:
-The MERN (MongoDB, Express, Reactm Node.js) stack was used to develop this full-stack web application.
+The MERN (MongoDB, Express, React.js Node.js) stack was used to develop this full-stack web application.
 
 * [MongoDB](https://www.mongodb.com/): used to deploy a live cloud server to store data in a database. User model with mongoose referencing for the known and known words (many to many), and mongoose embedding for the posts (one to many).
 
@@ -72,7 +72,7 @@ The MERN (MongoDB, Express, Reactm Node.js) stack was used to develop this full-
 ### Demo:
 [Click to write your dream project now!](https://scribist.herokuapp.com/)
 
-## Next Steps: Planned future enhancements:
+## Planned future enhancements:
 1. Add edit sections feature whereby you can drag and move a given section and it will re-render it on the Quill editor
 2. Add more consequences in Berserk Mode, for example have the screen turn crazy colors, or have it blast sounds at you.
 3. Sign in with Google Oauth, Github, or Facebook.
