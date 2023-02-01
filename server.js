@@ -17,11 +17,7 @@ require('./config/database');
 require('./config/passport');
 
 const app = express();
-const server = createServer(app);
-const io = module.exports.io = require("socket.io")(app)
-const ioMangager = require('./ioManager')
-
-io.on('connection', ioManager)
+const io = module.exports.io = require("socket.io")()
 
 
 app.use(logger('dev'));
@@ -48,13 +44,16 @@ const port = process.env.PORT || 3001;
 
 app.use(express.static(path.join(__dirname, 'build')));
 
-server.listen(port, () => {
-  console.log(`connected to port ${PORT}`)
-})
-
-app.listen(port, function() {
+const server = app.listen(port, function() {
   console.log(`Express app running on port ${port}`)
 });
+
+// io:
+// const server = http.Server(app);
+const ioManager = require('./ioManager')
+io.attach(server);
+
+io.on('connection', ioManager)
 
 
 
