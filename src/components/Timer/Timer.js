@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 
 export default function Timer({ time, showTools, isPaused, timerMode }) {
-  const initSecs = time
+  const initSecs = time;
   const [timer, setTimer] = useState(initSecs);
 
   useEffect(() => {
     if (isPaused) return;
-    if (!timerMode) return;
     const myInterval = setInterval(() => {
       if (timer > -1800 && !isPaused) {
         setTimer((timer) => timer - 1);
@@ -23,7 +22,8 @@ export default function Timer({ time, showTools, isPaused, timerMode }) {
         <div className="timer">
           <h3>
             {" "}
-            {Math.floor(timer / 60)}:{timer % 60 < 10 ? `0${timer % 60 }` : timer % 60 }
+            {Math.floor(timer / 60)}:
+            {timer % 60 < 10 ? `0${timer % 60}` : timer % 60}
           </h3>
         </div>
       ) : (
@@ -31,4 +31,4 @@ export default function Timer({ time, showTools, isPaused, timerMode }) {
       )}
     </div>
   );
-}
+};

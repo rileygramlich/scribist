@@ -146,7 +146,8 @@ export default function Berserk() {
             />
           </div>
           <div className="timer-mode-contain">
-            <h3 className="mode">Timer mode? </h3>
+            <h3 className="mode">Timer only mode? </h3>
+            <p className="descrip">Without this checked, Berserk will delete the last 5 characters every 2 seconds, if there is no input from the user after a 2 second buffer.</p>
             <input
               type="checkbox"
               name="mode"

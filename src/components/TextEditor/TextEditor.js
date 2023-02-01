@@ -39,8 +39,6 @@ export default function TextEditor({name, setName}) {
   useEffect(() => {
     const s = io("/");
     setSocket(s);
-    console.log(s);
-
     return () => {
       s.disconnect();
     };
