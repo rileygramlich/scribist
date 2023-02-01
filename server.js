@@ -17,21 +17,22 @@ require('./config/database');
 require('./config/passport');
 
 const app = express();
-const server = http.createServer(app);
-const io = require('./io');
-io.attach(server);
+const server = createServer(app);
+const io = module.exports.io = require("socket.io")(app)
+const ioMangager = require('./ioManager')
 
+io.on('connection', ioManager)
 
 
 app.use(logger('dev'));
 app.use(express.json());
 
 // Cors access
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "http://localhost:3001"); // update to match the domain you will make the request from
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
 
 
 // Configure both serve-favicon & static middleware
@@ -45,12 +46,17 @@ app.use(require('./config/checkToken'));
 // development to avoid collision with React's dev server
 const port = process.env.PORT || 3001;
 
+app.use(express.static(path.join(__dirname, 'build')));
+
+server.listen(port, () => {
+  console.log(`connected to port ${PORT}`)
+})
+
 app.listen(port, function() {
   console.log(`Express app running on port ${port}`)
 });
 
 
-app.use(express.static(path.join(__dirname, 'build')));
 
 // Put API routes here, before the "catch all" route
 app.use('/api/users', require('./routes/api/users'));

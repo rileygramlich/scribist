@@ -37,7 +37,7 @@ export default function TextEditor({name, setName}) {
 
   // UseEffect for connecting to socket
   useEffect(() => {
-    const s = io("http://localhost:3002");
+    const s = io("/");
     setSocket(s);
     console.log(s);
 

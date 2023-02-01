@@ -1,14 +1,9 @@
 const Doc = require("./models/doc");
 
 
-const io = require("socket.io")(3002, {
-  cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
-  },
-});
+const io = require('./server.js').io
 
-io.on("connection", function (socket) {
+module.exports = function(socket) {
   console.log(`Client with id of ${socket.id} connected`);
 
   socket.on("get-doc", async (docId) => {
@@ -25,12 +20,10 @@ io.on("connection", function (socket) {
       await Doc.findByIdAndUpdate(docId, { content });
     });
   });
-});
+};
 
 async function findDoc(id) {
   if (id == null) return;
   const doc = await Doc.findById(id);
   return doc;
 }
-
-module.exports = io;
