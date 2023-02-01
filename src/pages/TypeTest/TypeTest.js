@@ -8,31 +8,29 @@ export default function TypeTest() {
   const [quote, setQuote] = useState({});
   const [typed, setTyped] = useState("");
   const [testOn, setTestOn] = useState(false);
-  const [timerOn, setTimerOn] = useState(true);
+  const [timerOn, setTimerOn] = useState(false);
   const [time, setTime] = useState(0);
-  const [wpm, setWpm] = useState(0);
 
   useEffect(() => {
     async function renderQuote() {
       const quotes = await fetch(ROOT_URL).then((res) => res.json());
       const q = await quotes[Math.floor(Math.random() * (127 - 1) + 1)];
       setQuote(q);
-      console.log(quote);
     }
     renderQuote();
   }, []);
 
   useEffect(() => {
+    setTimerOn(!timerOn);
     if (!timerOn) return;
     const myInterval = setInterval(() => {
-      if (timerOn)
-      setTime((time) => time + 1);
+      if (timerOn) setTime((time) => time + 1);
       console.log(time);
     }, 1000);
     return () => {
       clearInterval(myInterval);
     };
-  }, [setTimerOn]);
+  }, [testOn]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -40,29 +38,24 @@ export default function TypeTest() {
     const quotes = await fetch(ROOT_URL).then((res) => res.json());
     const q = await quotes[Math.floor(Math.random() * (127 - 1) + 1)];
     setQuote(q);
-    console.log(quote);
   }
 
   function handleTestStart(e) {
     e.preventDefault();
-    console.log("start");
     setTestOn(true);
   }
 
   function handleDoneTest() {
-    console.log("getting test results");
-    // const count = typed.split(" ").filter((word) => word !== "").length;
-    // const wperminute = count / (time / 60);
-    // setWpm(wperminute);
-    setTimerOn(!timerOn)
-    console.log(timerOn)
+    setTestOn(!testOn);
   }
 
   return (
     <div className="TypeTest">
       <h1 className="title">Test Typing Speed!</h1>
-      <p className="quote">"{quote.quote}"</p>
-      <p className="author">~ {quote.source}</p>
+      <div className="quote">
+        <h3>"{quote.quote}"</h3>
+        <p className="author">~ {quote.source}</p>
+      </div>
       <button className="new-quote" type="submit" onClick={handleSubmit}>
         Type New Quote
       </button>
@@ -70,7 +63,7 @@ export default function TypeTest() {
       <button className="start-btn" onClick={handleTestStart}>
         Start Test
       </button>
-      <form action="" ></form>
+      <form action=""></form>
       <textarea
         name="type"
         id=""
@@ -84,12 +77,16 @@ export default function TypeTest() {
         Finish Test
       </button>
       <p>{time}</p>
-      
+
       <h5>
         You typed {typed.split(" ").filter((word) => word !== "").length} words
         in {Math.floor(time / 60)} mins and {time % 60} seconds.
       </h5>
-      <h5>That's {typed.split(" ").filter((word) => word !== "").length / (time/60)} wpm</h5>
+      <h5>
+        That's{" "}
+        {typed.split(" ").filter((word) => word !== "").length / (time / 60)}{" "}
+        wpm
+      </h5>
     </div>
   );
 }
