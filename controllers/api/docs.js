@@ -29,17 +29,13 @@ async function createDoc(req, res) {
 }
 
 async function deleteDoc(req, res) {
-  console.log("deleting");
   try {
     const { docId } = req.body;
-    // const wordCount = content.split(' ').length
-    // console.log(wordCount)
     console.log(docId);
     Doc.findOneAndDelete({ _id: docId }).then(function () {
       console.log("deleted");
     });
-    const docs = await Doc.find({});
-    console.log(docs);
+    const docs = await Doc.find({ user: req.user._id });
     res.json(docs);
   } catch (err) {
     res.status(409).json({ message: err.message });
@@ -76,6 +72,6 @@ async function updateDoc(req, res) {
     console.log(doc);
     res.json(doc);
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
 }
