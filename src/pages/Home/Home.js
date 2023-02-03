@@ -21,7 +21,7 @@ export default function Home({user, handleNewDoc}) {
           ];
         }
         getDocs();
-      }, []);
+      }, [docs]);
 
       async function handleDelete(docId) {
         const docs = await docsAPI.deleteDoc(docId)

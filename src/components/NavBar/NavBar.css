@@ -53,3 +53,21 @@ input {
   display: flex;
   justify-content: flex-end;
 }
+
+#new-doc-btn {
+  display: block;
+  width: 100%;
+  padding: var(--bs-dropdown-item-padding-y) var(--bs-dropdown-item-padding-x);
+  clear: both;
+  font-weight: 400;
+  color: var(--font-color);
+  text-align: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+}
+
+#new-doc-btn:hover {
+  color: #0d6efd;
+}

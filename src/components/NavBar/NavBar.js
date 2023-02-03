@@ -61,7 +61,7 @@ export default function NavBar({ user, setUser, toggleTheme, handleNewDoc }) {
                 <div className="drop-contain">
                   <NavDropdown.Item className="drop-item">
                     {user ? (
-                      <button className="new-doc-btn" onClick={handleNewDoc}>
+                      <button id="new-doc-btn" onClick={handleNewDoc}>
                         New Doc
                       </button>
                     ) : (

@@ -147,7 +147,7 @@ export default function Berserk() {
             />
           </div>
           <div className="timer-mode-contain">
-            <h3 className="mode">Timer only mode? </h3>
+            <h3 className="mode">Timer only? </h3>
             <input
               type="checkbox"
               name="mode"
@@ -155,7 +155,7 @@ export default function Berserk() {
               onChange={(e) => setTimerMode(e.target.value)}
               className="check"
             />
-            <p className="descrip">Check this box if you don't want Berserk to delete the last 5 characters every 2 seconds you don't type.</p>
+            <p className="descrip">Check this box if you don't want Berserk to delete the last 5 characters every 2 seconds you don't type something.</p>
           </div>
           <button type="submit" id="berserk-button">
             Go Berserk and write {target} words in {Math.floor(time / 60)}{" "}
