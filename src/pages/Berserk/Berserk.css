@@ -10,11 +10,22 @@
 
 .duration-contain, .target-contain {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 30px
 }
 
-#time {
+#time, #target-range {
     min-width: 50vw;
+}
+
+#target-in {
+    background-color: var(--bg-color);
+}
+
+.check {
+    transform: scale(3);
+    margin: 30px;
 }
 
 
@@ -32,6 +43,8 @@
     gap: 20px;
 }
 
-.typed {
-   
+
+
+#berserking {
+   height: 70vh;
 }

@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Timer from "../../components/Timer/Timer";
-
 import { FaPause, FaPlay, FaCopy } from "react-icons/fa";
 
 // CSS
@@ -25,8 +24,6 @@ export default function Berserk() {
 
   function handleBerserkStart(e) {
     e.preventDefault();
-    console.log("going berserk");
-    console.log(timerMode);
     setBerserk(!false);
     // start timer
   }
@@ -34,25 +31,22 @@ export default function Berserk() {
   function handleDone(e) {
     handleCopy(e);
     setBerserk(!berserk);
-    navigate("/docs");
+    navigate("/");
   }
 
   function toggleTools() {
-    console.log("toggling tools");
     setShowTools(!showTools);
   }
 
   function togglePause() {
     console.log("toggling pause");
     setIsPaused(!isPaused);
-    console.log(isPaused);
   }
 
   function handleCopy(e) {
     textAreaRef.current.select();
     document.execCommand("copy");
     e.target.focus();
-    console.log("text copied");
   }
 
   function handleTextChange(newValue) {
@@ -63,7 +57,6 @@ export default function Berserk() {
 
   useEffect(() => {
     if (timerMode) return;
-    console.log("timing");
     const interval = setInterval(() => {
       if (!isPaused) {
         handleTextChange(typed.slice(0, -5));
@@ -138,22 +131,31 @@ export default function Berserk() {
           <div className="target-contain">
             <h3 className="target">Word Target: </h3>
             <input
+              type="range"
+              name="target"
+              id="target-range"
+              min="10"
+              max="10000"
+              onChange={(e) => setTarget(e.target.value)}
+            />
+            <input
               type="number"
               name="target"
               value={target}
-              id="word-target"
+              id="target-in"
               onChange={(e) => setTarget(e.target.value)}
             />
           </div>
           <div className="timer-mode-contain">
             <h3 className="mode">Timer only mode? </h3>
-            <p className="descrip">Without this checked, Berserk will delete the last 5 characters every 2 seconds, if there is no input from the user after a 2 second buffer.</p>
             <input
               type="checkbox"
               name="mode"
               value={timerMode}
               onChange={(e) => setTimerMode(e.target.value)}
+              className="check"
             />
+            <p className="descrip">Check this box if you don't want Berserk to delete the last 5 characters every 2 seconds you don't type.</p>
           </div>
           <button type="submit" id="berserk-button">
             Go Berserk and write {target} words in {Math.floor(time / 60)}{" "}
