@@ -21,12 +21,21 @@ export default function NavBar({ user, setUser, toggleTheme, handleNewDoc }) {
     }
 
     const [show, setShow] = useState(false);
-    function showDropdown(e) {
+    function showUtilsDropdown(e) {
         setShow(!show);
     }
 
-    function hideDropdown(e) {
+    function hideUtilsDropdown(e) {
         setShow(false);
+    }
+
+    const [showUser, setShowUser] = useState(false);
+    function showUserDropdown(e) {
+        setShowUser(!showUser);
+    }
+
+    function hideUserDropdown(e) {
+        setShowUser(false);
     }
 
     return (
@@ -51,12 +60,12 @@ export default function NavBar({ user, setUser, toggleTheme, handleNewDoc }) {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="container-fluid">
                             <NavDropdown
-                                className="ml-auto"
                                 title="Utilities"
+                                className="ml-auto"
                                 id="basic-nav-dropdown"
                                 show={show}
-                                onMouseEnter={showDropdown}
-                                onMouseLeave={hideDropdown}
+                                onMouseEnter={showUtilsDropdown}
+                                onMouseLeave={hideUtilsDropdown}
                             >
                                 <div className="drop-contain">
                                     <NavDropdown.Item className="drop-item">
@@ -88,16 +97,31 @@ export default function NavBar({ user, setUser, toggleTheme, handleNewDoc }) {
                             {user ? (
                                 <NavDropdown
                                     title="User"
+                                    className="ml-auto"
                                     id="basic-nav-dropdown"
+                                    show={showUser}
+                                    onMouseEnter={showUserDropdown}
+                                    onMouseLeave={hideUserDropdown}
                                 >
                                     <div className="drop-contain">
-                                        <div>User: {user.name}</div>
-                                        <div>Email: {user.email}</div>
+                                        <div
+                                            className="user-drop-item"
+                                            id="username"
+                                        >
+                                            User: {user.name}
+                                        </div>
+                                        <div
+                                            className="user-drop-item"
+                                            id="password"
+                                        >
+                                            Email: {user.email}
+                                        </div>
                                         <NavDropdown.Divider />
                                         <NavDropdown.Item>
                                             <Link
                                                 to="/user/logout"
                                                 onClick={handleLogout}
+                                                className="drop-item"
                                             >
                                                 Logout
                                             </Link>
@@ -108,6 +132,9 @@ export default function NavBar({ user, setUser, toggleTheme, handleNewDoc }) {
                                 <NavDropdown
                                     title="User"
                                     id="basic-nav-dropdown"
+                                    show={showUser}
+                                    onMouseEnter={showUserDropdown}
+                                    onMouseLeave={hideUserDropdown}
                                 >
                                     <NavDropdown.Item>
                                         <Link to="/">Login</Link>
