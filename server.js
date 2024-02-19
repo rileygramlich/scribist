@@ -1,26 +1,24 @@
-const express = require('express');
-const path = require('path');
-const favicon = require('serve-favicon');
-const logger = require('morgan');
+const express = require("express");
+const path = require("path");
+const favicon = require("serve-favicon");
+const logger = require("morgan");
 
 // Oauth
 // var cookieParser = require('cookie-parser');
 // var session = require('express-session');
 // var passport = require('passport');
 
-var debug = require('debug')('realtime-socket-io:server');
-var http = require('http');
+var debug = require("debug")("realtime-socket-io:server");
+var http = require("http");
 
-
-require('dotenv').config()
-require('./config/database');
-require('./config/passport');
+require("dotenv").config();
+require("./config/database");
+require("./config/passport");
 
 const app = express();
-const io = module.exports.io = require("socket.io")()
+const io = (module.exports.io = require("socket.io")());
 
-
-app.use(logger('dev'));
+app.use(logger("dev"));
 app.use(express.json());
 
 // Cors access
@@ -30,46 +28,42 @@ app.use(express.json());
 //   next();
 // });
 
-
 // Configure both serve-favicon & static middleware
 // to serve from the production 'build' folder
-app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(favicon(path.join(__dirname, "build", "favicon.ico")));
+app.use(express.static(path.join(__dirname, "build")));
 
-app.use(require('./config/checkToken'));
+app.use(require("./config/checkToken"));
 
 // Configure to use port 3001 instead of 3000 during
 // development to avoid collision with React's dev server
 const port = process.env.PORT || 3001;
 
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, "build")));
 
-const server = app.listen(port, function() {
-  console.log(`Express app running on port ${port}`)
+const server = app.listen(port, function () {
+    console.log(`Express app running on port ${port}`);
 });
 
 // io:
 // const server = http.Server(app);
-const ioManager = require('./ioManager')
+const ioManager = require("./ioManager");
 io.attach(server);
 
-io.on('connection', ioManager)
-
-
+io.on("connection", ioManager);
 
 // Put API routes here, before the "catch all" route
-app.use('/api/users', require('./routes/api/users'));
+app.use("/api/users", require("./routes/api/users"));
 
-const ensureLoggedIn = require('./config/ensureLoggedIn');
-app.use('/api/docs', ensureLoggedIn, require('./routes/api/docs'));
+const ensureLoggedIn = require("./config/ensureLoggedIn");
+app.use("/api/docs", ensureLoggedIn, require("./routes/api/docs"));
 
 // The following "catch all" route (note the *) is necessary
 // to return the index.html on all non-AJAX requests
-app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+app.get("/*", function (req, res) {
+    res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
- // inside bin/www
+// inside bin/www
 
- 
- // load and attach socket.io to http server
+// load and attach socket.io to http server

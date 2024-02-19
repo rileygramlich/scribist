@@ -1,32 +1,32 @@
 /* Dark theme */
 
 :root {
-  --primary-color: #0a5a9f;
-  --secondary-color: #82a0c0;
-  --font-color: #fff;
-  --bg-color: #424242;
-  --heading-color: #20201d;
+    --primary-color: #0a5a9f;
+    --secondary-color: #82a0c0;
+    --font-color: #fff;
+    --bg-color: #424242;
+    --heading-color: #20201d;
 }
 
 #light {
-  --primary-color: #82a0c0;
-  --secondary-color: #0a5a9f;
-  --font-color: #000000;
-  --bg-color: #c6c6c6;
-  --heading-color: #f4f4f4;
+    --primary-color: #82a0c0;
+    --secondary-color: #0a5a9f;
+    --font-color: #000000;
+    --bg-color: #c6c6c6;
+    --heading-color: #f4f4f4;
 }
 
 #dark,
 #light {
-  background-color: var(--bg-color);
-  color: var(--font-color);
+    background-color: var(--bg-color);
+    color: var(--font-color);
 }
 
 /* APP */
 .App {
-  text-align: center;
-  min-height: 130vh;
-  font-family: "Ubuntu", sans-serif;
+    text-align: center;
+    min-height: 100vh;
+    font-family: "Ubuntu", sans-serif;
 }
 
 .Home,
@@ -34,58 +34,60 @@
 .About,
 .Berserk,
 .AuthPage {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+    position: relative;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .Doc {
-  min-height: fit-content;
+    min-height: fit-content;
 }
 
 Link {
-  color: var(--font-color);
+    color: var(--font-color);
 }
 
 button {
-  background-color: var(--primary-color);
-  color: var(--font-color);
-  border: 1px solid var(--primary-color);
-  border-radius: 5px;
-  margin: 20px;
+    background-color: var(--primary-color);
+    color: var(--font-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    margin: 20px;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+    height: 40vmin;
+    pointer-events: none;
 }
 
 input {
-  background-color: var(--heading-color);
-  color: var(--font-color);
-  border: none;
-  border-radius: 5px;
-  margin-bottom: 10px;
+    background-color: var(--heading-color);
+    color: var(--font-color);
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 /* NAVBAR */
 #Nav {
-  background-color: var(--heading-color);
+    background-color: var(--heading-color);
 }
 
 /* DOC PAGE */
 textarea {
-  background-color: var(--heading-color);
-  color: var(--font-color);
-  border: none;
+    background-color: var(--heading-color);
+    color: var(--font-color);
+    border: none;
 }
 
 /* HOME PAGE */
 #new-doc-btn {
-  background-color: var(--primary-color);
-  color: var(--font-color);
+    background-color: var(--primary-color);
+    color: var(--font-color);
 }
 
 #doc-card {
-  background-color: var(--heading-color);
+    background-color: var(--heading-color);
 }
