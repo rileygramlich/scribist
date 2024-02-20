@@ -5,7 +5,7 @@ import LoginForm from "../../components/LoginForm/LoginForm";
 import "./AuthPage.css";
 
 export default function AuthPage({ setUser }) {
-    const [showLogin, setShowLogin] = useState(true);
+    const [showLogin, setShowLogin] = useState(false);
 
     function handleShow() {
         let status = !showLogin;
@@ -19,7 +19,11 @@ export default function AuthPage({ setUser }) {
             ) : (
                 <SignUpForm setUser={setUser} />
             )}
-            <button className="user-butter" onClick={handleShow}>
+            <button
+                className="user-button"
+                id="sign-up-toggle"
+                onClick={handleShow}
+            >
                 {showLogin
                     ? "Don't have an account with us?"
                     : "Already a user?"}

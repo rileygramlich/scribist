@@ -30,16 +30,20 @@ export default function LoginForm({ setUser }) {
     }
 
     return (
-        <div>
-            <div>
+        <div id="auth-container">
+            <div id="login-container">
+                <h3 className="title" id="sign-up-title">
+                    Login With Email:{" "}
+                </h3>
                 <form
                     className="form-container"
                     autoComplete="off"
                     onSubmit={handleSubmit}
                 >
-                    <div className="in">
+                    <div className="input-container">
                         <label>Email: </label>
                         <input
+                            className="auth-in"
                             type="text"
                             name="email"
                             value={credentials.email}
@@ -47,9 +51,10 @@ export default function LoginForm({ setUser }) {
                             required
                         />
                     </div>
-                    <div className="in">
+                    <div className="input-container">
                         <label>Password: </label>
                         <input
+                            className="auth-in"
                             type="password"
                             name="password"
                             value={credentials.password}
@@ -57,7 +62,9 @@ export default function LoginForm({ setUser }) {
                             required
                         />
                     </div>
-                    <button type="submit">LOG IN</button>
+                    <button className="submit-auth-button" type="submit">
+                        LOG IN
+                    </button>
                 </form>
             </div>
             <p className="error-message">&nbsp;{error}</p>

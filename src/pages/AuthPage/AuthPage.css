@@ -1,26 +1,56 @@
 .AuthPage {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#auth-container,
+#sign-up-toggle {
+    background-color: var(--primary-color);
+    min-width: 50vw;
+}
+
+#auth-container {
+    border-radius: 10px 10px 0 0;
+}
+
+#sign-up-toggle {
+    border-radius: 0 0 10px 10px;
+}
+
+#sign-up-toggle:hover {
+    color: var(#000);
 }
 
 .form-container {
     display: flex;
-    justify-content: space-evenly;
-    align-content: space-between;
+    justify-content: center;
+    align-content: center;
     margin: auto;
-    min-height: 50vh;
     max-width: 50vw;
-    background-color: var(--primary-color);
-    border-radius: 5%;
-    margin-top: 15vh;
 }
 
 .form-container > * {
     gap: 2vh;
 }
 
-.in {
-    display: flex;
-    justify-content: center;
+.input-container {
+    display: grid;
+    justify-content: start;
     align-content: space-between;
+    text-align: left;
+    margin-top: 15px;
+}
+
+.auth-in {
+    display: grid;
+    grid-template-columns: 1fr auto; /* Adjust the width of the columns as needed */
+    justify-content: start; /* Align items to the start of the row */
+    margin: 0px;
+}
+
+.label {
+    text-align: left; /* Align text of labels to the right */
+    margin-left: 40x;
 }
