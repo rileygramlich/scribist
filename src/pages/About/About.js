@@ -1,5 +1,6 @@
 import React from "react";
-import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 import "./About.css";
@@ -37,14 +38,14 @@ export default function About() {
                     >
                         LinkedIn
                     </Link>{" "}
-                    or{" "}
+                    or on{" "}
                     <Link
                         to="https://twitter.com/rileygramlich"
                         rel="noopener noreferrer"
                         target="_blank"
                         className="link"
                     >
-                        Twitter
+                        X
                     </Link>{" "}
                     about it!
                     <hr />
@@ -101,7 +102,7 @@ export default function About() {
                                 rel="noopener noreferrer"
                                 target="_blank"
                             >
-                                <FaTwitter />
+                                <FaXTwitter />
                             </Link>
                         </div>
                     </li>

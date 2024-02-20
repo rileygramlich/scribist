@@ -9,42 +9,41 @@ import * as docsAPI from "../../utilities/docs-api";
 import "./Doc.css";
 
 export default function Doc({ user }) {
+    const { docId } = useParams();
 
-  const { docId } = useParams();
+    const [name, setName] = useState("");
 
-  const [name, setName] = useState("");
+    useEffect(() => {
+        async function renderDoc() {
+            const doc = await docsAPI.getDoc(docId);
+            setName(doc.name);
+        }
+        renderDoc();
+    }, []);
 
-  useEffect(() => {
-    async function renderDoc() {
-      const doc = await docsAPI.getDoc(docId);
-      setName(doc.name);
+    async function handleSaveDoc() {
+        await docsAPI.update(docId, name);
     }
-    renderDoc();
-  }, []);
 
-  async function handleSaveDoc() {
-    await docsAPI.update(docId, name);
-  }
+    function handleNameChange(e) {
+        setName(e.target.value);
+        handleSaveDoc();
+    }
 
-  function handleNameChange(e) {
-    setName(e.target.value);
-    handleSaveDoc();
-  }
-
-  return (
-    <main className="Doc">
-      <div className="page-container">
-        <form className="doc-form" onSubmit={handleSaveDoc}>
-          <input
-            type="text"
-            name={name}
-            value={name}
-            onChange={handleNameChange}
-            className="doc-name"
-          />
-          <TextEditor setName={setName} name={name} />
-        </form>
-      </div>
-    </main>
-  );
+    return (
+        <main className="Doc">
+            <div className="page-container">
+                <form className="doc-form" onSubmit={handleSaveDoc}>
+                    <input
+                        type="text"
+                        name={name}
+                        value={name}
+                        onChange={handleNameChange}
+                        className="doc-name"
+                    />
+                    <TextEditor setName={setName} name={name} />
+                </form>
+            </div>
+        </main>
+    );
 }
