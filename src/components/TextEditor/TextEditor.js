@@ -36,7 +36,7 @@ export default function TextEditor({ name, setName }) {
 
     // UseEffect for connecting to socket
     useEffect(() => {
-        const s = io("http://127.0.0.1:3000");
+        const s = io("https://scribist.vercel.app/");
         setSocket(s);
         return () => {
             s.disconnect();
