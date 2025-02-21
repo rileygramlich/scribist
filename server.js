@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const favicon = require("serve-favicon");
 const logger = require("morgan");
+const http = require("http");
 
 // Oauth
 // var cookieParser = require('cookie-parser');
@@ -9,24 +10,27 @@ const logger = require("morgan");
 // var passport = require('passport');
 
 var debug = require("debug")("realtime-socket-io:server");
-var http = require("http");
 
 require("dotenv").config();
 require("./config/database");
 require("./config/passport");
 
 const app = express();
-const io = (module.exports.io = require("socket.io")());
+const server = http.createServer(app);
+const io = require("socket.io")(server);
 
 app.use(logger("dev"));
 app.use(express.json());
 
 // Cors access
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "http://localhost:3001"); // update to match the domain you will make the request from
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   next();
-// });
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "http://localhost:3001"); // update to match the domain you will make the request from
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+});
 
 // Configure both serve-favicon & static middleware
 // to serve from the production 'build' folder
@@ -41,15 +45,15 @@ const port = process.env.PORT || 3001;
 
 app.use(express.static(path.join(__dirname, "build")));
 
-const server = app.listen(port, function () {
-    console.log(`Express app running on port ${port}`);
-});
+if (process.env.NODE_ENV !== "production") {
+    server.listen(port, function () {
+        console.log(`Express app running on port ${port}`);
+    });
+}
 
 // io:
 // const server = http.Server(app);
 const ioManager = require("./ioManager");
-io.attach(server);
-
 io.on("connection", ioManager);
 
 // Put API routes here, before the "catch all" route
@@ -67,3 +71,5 @@ app.get("/*", function (req, res) {
 // inside bin/www
 
 // load and attach socket.io to http server
+
+module.exports = { app, io };

@@ -7,7 +7,7 @@ export default function Footer() {
         <footer className="footer">
             <p>
                 {" "}
-                &copy; 2024 Scribist | Designed & Developed by Riley Gramlich
+                &copy; 2025 Scribist | Designed & Developed by Riley Gramlich
             </p>
         </footer>
     );
