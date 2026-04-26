@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
-const DocSchema = require("./doc");
 
-const SALT_ROUNDS = 6; // 6 is a reasonable value
+const SALT_ROUNDS = 10;
 
 const userSchema = new Schema(
   {
@@ -19,9 +18,21 @@ const userSchema = new Schema(
       type: String,
       trim: true,
       minLength: 3,
-      required: true,
-    }
-    // docs: { type: [Schema.Types.ObjectId], ref: DocSchema },
+      required: function () {
+        return !this.googleId;
+      },
+    },
+    googleId: {
+      type: String,
+      unique: true,
+      sparse: true,
+      index: true,
+    },
+    authProvider: {
+      type: String,
+      enum: ["local", "google"],
+      default: "local",
+    },
   },
   {
     timestamps: true,
@@ -36,8 +47,7 @@ const userSchema = new Schema(
 
 userSchema.pre("save", async function (next) {
   // 'this' is the user doc
-  if (!this.isModified("password")) return next();
-  // update the password with the computed hash
+  if (!this.password || !this.isModified("password")) return next();
   this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
   return next();
 });

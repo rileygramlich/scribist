@@ -72,6 +72,26 @@ The MERN (MongoDB, Express, React.js Node.js) stack was used to develop this ful
 ### Demo:
 [Click to write your dream project now!](https://scribist.herokuapp.com/)
 
+### Local setup
+1. Copy `.env.example` to `.env` and fill required values.
+2. Install dependencies:
+   - `npm ci`
+3. Run app:
+   - `npm run dev`
+
+### Google Sign-In setup
+1. Create an OAuth client in Google Cloud Console (Web application).
+2. Add authorized origins (example):
+   - `http://localhost:3000`
+   - your production frontend origin
+3. Set both environment variables to the same client ID:
+   - `GOOGLE_CLIENT_ID`
+   - `REACT_APP_GOOGLE_CLIENT_ID`
+4. Restart server + frontend after updating env vars.
+
+### Review + refresh notes
+See `docs/REVIEW_REFRESH.md` for the latest technical review and refresh backlog.
+
 ## Planned future enhancements:
 1. Add edit sections feature whereby you can drag and move a given section and it will re-render it on the Quill editor
 2. Add more consequences in Berserk Mode, for example have the screen turn crazy colors, or have it blast sounds at you.

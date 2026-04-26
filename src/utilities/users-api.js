@@ -9,6 +9,10 @@ export async function login(credentials) {
   return sendRequest(`${BASE_URL}/login`, 'POST', credentials);
 }
 
+export async function googleLogin(credential) {
+  return sendRequest(`${BASE_URL}/google`, 'POST', { credential });
+}
+
 export function checkToken() {
   return sendRequest(BASE_URL + '/check-token')
 }

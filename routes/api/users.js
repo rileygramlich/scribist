@@ -10,6 +10,7 @@ const usersCtrl = require("../../controllers/api/users");
 
 // POST /api/users
 router.post("/login", usersCtrl.login);
+router.post("/google", usersCtrl.googleLogin);
 router.post("/", usersCtrl.create);
 
 // GET /api/users/check-token

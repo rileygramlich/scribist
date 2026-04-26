@@ -3,6 +3,7 @@ const path = require("path");
 const favicon = require("serve-favicon");
 const logger = require("morgan");
 const http = require("http");
+const cors = require("cors");
 
 // Oauth
 // var cookieParser = require('cookie-parser');
@@ -22,15 +23,22 @@ const io = require("socket.io")(server);
 app.use(logger("dev"));
 app.use(express.json());
 
-// Cors access
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "https://scribist.vercel.app/"); // update to match the domain you will make the request from
-    res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
-});
+const allowedOrigins = (process.env.CORS_ORIGIN || "http://localhost:3000,https://scribist.vercel.app")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+
+app.use(
+    cors({
+        origin: function (origin, callback) {
+            if (!origin || allowedOrigins.includes(origin)) {
+                callback(null, true);
+            } else {
+                callback(new Error("Not allowed by CORS"));
+            }
+        },
+    })
+);
 
 // Configure both serve-favicon & static middleware
 // to serve from the production 'build' folder
@@ -43,9 +51,7 @@ app.use(require("./config/checkToken"));
 // development to avoid collision with React's dev server
 const port = process.env.PORT || 3001;
 
-app.use(express.static(path.join(__dirname, "build")));
-
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV !== "test") {
     server.listen(port, function () {
         console.log(`Express app running on port ${port}`);
     });

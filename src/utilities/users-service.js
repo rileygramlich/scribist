@@ -16,6 +16,12 @@ export async function login(credentials) {
   return getUser()
 }
 
+export async function loginWithGoogle(credential) {
+  const token = await usersAPI.googleLogin(credential)
+  localStorage.setItem('token', token)
+  return getUser()
+}
+
 export function getToken() {
   // getItem returns null if there's no string
   const token = localStorage.getItem('token');

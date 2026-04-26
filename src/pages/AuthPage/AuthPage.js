@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SignUpForm from "../../components/SignUpForm/SignUpForm";
 import LoginForm from "../../components/LoginForm/LoginForm";
+import GoogleSignInButton from "../../components/GoogleSignInButton/GoogleSignInButton";
 
 import "./AuthPage.css";
 
@@ -19,6 +20,9 @@ export default function AuthPage({ setUser }) {
             ) : (
                 <SignUpForm setUser={setUser} />
             )}
+            <div style={{ marginTop: "0.75rem", marginBottom: "0.5rem" }}>
+                <GoogleSignInButton setUser={setUser} />
+            </div>
             <button
                 className="user-button"
                 id="sign-up-toggle"
