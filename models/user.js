@@ -1,45 +1,34 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-const bcrypt = require("bcrypt");
-const DocSchema = require("./doc");
+const bcrypt = require("bcryptjs");
 
-const SALT_ROUNDS = 6; // 6 is a reasonable value
+const SALT_ROUNDS = 10;
 
-const userSchema = new Schema(
-  {
-    name: { type: String, required: true },
-    email: {
-      type: String,
-      unique: true,
-      trim: true,
-      lowercase: true,
-      required: true,
+const userSchema = new mongoose.Schema(
+    {
+        name: { type: String, required: true, trim: true, maxlength: 80 },
+        email: { type: String, unique: true, trim: true, lowercase: true, required: true, maxlength: 254 },
+        // Not required for people who only ever sign in with Google.
+        password: { type: String, minlength: 6, required() { return !this.googleId; } },
+        googleId: { type: String, unique: true, sparse: true },
     },
-    password: {
-      type: String,
-      trim: true,
-      minLength: 3,
-      required: true,
+    {
+        timestamps: true,
+        toJSON: {
+            transform(doc, ret) {
+                delete ret.password;
+                return ret;
+            },
+        },
     }
-    // docs: { type: [Schema.Types.ObjectId], ref: DocSchema },
-  },
-  {
-    timestamps: true,
-    toJSON: {
-      transform: function (doc, ret) {
-        delete ret.password;
-        return ret;
-      },
-    },
-  }
 );
 
-userSchema.pre("save", async function (next) {
-  // 'this' is the user doc
-  if (!this.isModified("password")) return next();
-  // update the password with the computed hash
-  this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
-  return next();
+userSchema.pre("save", async function () {
+    if (!this.password || !this.isModified("password")) return;
+    this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
 });
+
+userSchema.methods.checkPassword = function (password) {
+    return Boolean(this.password) && bcrypt.compare(password, this.password);
+};
 
 module.exports = mongoose.model("User", userSchema);

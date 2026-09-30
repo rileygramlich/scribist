@@ -1,85 +1,71 @@
 # Scribist
-### A writing app with editing features, Berserk Mode writing, and testing your typing speed.
+### A writing room: docs you can edit together live, Berserk Mode for getting words down, and a typing test.
+
 #### By [rileygramlich](https://github.com/rileygramlich)
----
-[Click to use Scribist!](https://scribist.herokuapp.com/)
 
-## Description and Background Info:
-This utility app is built with the intention of helping people write more, especially with Berserk mode which allows you to pressure yourself with a word target and a timer set to reach that target.
+![A doc in Scribist, light mode](./docs/screenshots/doc-light.png)
 
-### Create and Edit Docs:
-Create new documents for writing stories, or essays, or anything. This doc editor autosaves your work every 2 seconds. Also, if you want to collaborate with a friend on the document, just shoot them the link and you can see each other's changes appear live.
+## What it does
 
-![gif of doc page](./public/img/doc-dark.png)
-![gif of doc page](./public/img/doc-light.png)
+### Docs, together
+Rich-text documents (headings, lists, quotes, code, links, colour) set in [Newsreader](https://fonts.google.com/specimen/Newsreader). They save themselves a second after you stop typing, and the status next to the title says so: *Saving… → Saved just now*, or *Offline, reconnecting…* if the connection drops. Unsaved edits are kept and sent when it comes back.
 
+To write with someone, click **Share** and send them the link. Once they're signed in, you'll see each other's changes as you type and who else is in the doc. The link carries a random share token, so docs can't be opened by guessing their address. Only the owner can delete a doc; collaborators can leave it.
 
-### Berserk Mode:
-The purpose of this feature is to encourage your to have a continuous flow of writing. Berserk mode allows you to set a word target and a timer for how long you have to write targeted amount of words.  The cool thing about this mode is that if you stop typing, it will start erasing your words! The buffer time before it's starts erasing is set to 2 seconds. So go berserk and don't stop writing!
+![A shared doc, dark mode](./docs/screenshots/doc-dark.png)
 
+### Berserk Mode
+Set a timer and a word target, then don't stop. In **Berserk** mode, pausing for more than 2 seconds starts deleting your last few characters every 2 seconds until you type again, and a red bar warns you as the grace period runs out. **Timer only** mode keeps the clock and the target but never deletes. You can pause (the clock and the eraser both stop), hide the stats to focus, and at the end save the session as a doc or copy it. It works without an account; if you sign up from the results screen, the writing is saved to your new account.
 
-![gif of berserk mode](./public/img/berserk-setup.png)
-![gif of berserk mode](./public/img/berserk.png)
+![Berserk Mode on a phone: setup, writing, results](./docs/screenshots/berserk-phone.png)
 
-<!-- ### Typing Test:
+### Typing test
+Type a quote. The clock starts on your first key, each character is marked right or wrong as you go, and you get words per minute and accuracy at the end.
 
-![gif of type test]() -->
+Light and dark themes follow your system, and the moon/sun button switches them (remembered per browser).
 
+## Running it locally
 
-## Screenshots:
-Of Authorization Page:
-![Screenshots](./public/img/auth.png)
+Node 22 and MongoDB (Docker is quickest):
 
-Of All Docs Page:
-![Screenshots](./public/img/all-docs.png)
+```bash
+npm install
+cp .env.example .env
+docker run -d --name scribist-mongo -p 27017:27017 mongo:7
+npm run dev        # API + sockets on :3001, the site on http://localhost:5173
+```
 
+`npm run preview` builds the site and serves everything from `node server.js` on :3001, which is how it runs in production.
 
-## Technologies Used:
-The MERN (MongoDB, Express, React.js Node.js) stack was used to develop this full-stack web application.
+### Environment
 
-* [MongoDB](https://www.mongodb.com/): used to deploy a live cloud server to store data in a database. User model with mongoose referencing for the known and known words (many to many), and mongoose embedding for the posts (one to many).
+| Variable | |
+|---|---|
+| `DATABASE_URL` | MongoDB connection string. Defaults to `mongodb://127.0.0.1:27017/scribist`. |
+| `SECRET` | Signs the login tokens (JWTs). Required in production. |
+| `GOOGLE_CLIENT_ID` | Optional. Shows "Continue with Google". Add the site's address to the OAuth client's **Authorized JavaScript origins**. |
 
-* [Express](https://expressjs.com/): used for handling all of the back-end operations (routing, schema data manipulation, and so on).
+## Deploying
 
-* [React.js](https://reactjs.org/): UI JavaScript Library. [more here]
+Scribist is one Node process that serves the built site, the API and Socket.IO. Live collaboration needs a host that keeps that process running with WebSockets, which serverless hosts like Vercel don't do.
 
-* [Node.js](https://nodejs.org/en/): used as the live server environment, to monitor server operations, and view the web-app in a browser when running nodemon.
+**Heroku** (GitHub Student Developer Pack: $13/month of credit for 24 months, enough for an always-on Basic dyno): create an app, connect this repo, and set `DATABASE_URL`, `SECRET` (`openssl rand -hex 32`) and optionally `GOOGLE_CLIENT_ID` under Settings → Config Vars. The `Procfile` runs `npm start`, and Heroku runs `npm run build` on each deploy.
 
-<!-- * [Google People API](https://console.cloud.google.com/): used as a third party API to make Oauthentication with Google possible and bring in Google user data. -->
+**Render** (free, but sleeps after 15 idle minutes): New → Blueprint → this repo. `render.yaml` sets everything up and generates `SECRET`; paste `DATABASE_URL` when asked.
 
-* Javascript: used constantly throughout the application to write functions and manipulate the data accordingly.
+**Database:** a free MongoDB Atlas cluster works. Allow `0.0.0.0/0` under Network Access, since these hosts have no fixed IP address. `GET /api/health` reports whether the app can reach it, and why not.
 
-* CSS (including bootstrap and materialize libraries): used to style the app and make it look clean and pretty.
+## How it's built
 
-* [Github](https://github.com/): used for version control.
+MERN: MongoDB, Express 5, React 19 and Node.js, with [Quill 2](https://quilljs.com/) for the editor and [Socket.IO](https://socket.io/) for live editing. Vite builds the front end; the styling is hand-written CSS with light and dark themes, set in Newsreader and Inter.
 
-* [VSCode Editor](https://code.visualstudio.com/): used to write and code and manage file locations.
+```
+server.js              Express: the API, Socket.IO and the built site, all on one origin
+ioManager.js           live editing: authenticated sockets, one room per doc, presence, saves
+config/                database (with reconnects), JWT auth
+models/                User (password or Google), Doc (owner, collaborators, share token)
+controllers/ routes/   /api/users (sign up, log in, Google), /api/docs
+src/                   React: pages/ (Doc, Berserk, TypeTest, Home, Auth, About), components/, lib/, styles/
+```
 
-<!-- * [Railway](https://railway.app/): used for deploying the app for others to use. Use now: [link to app] -->
-
-* [Trello](https://trello.com/u/rileygramlich1/boards): was used for making a do list list and managing tasks to get done.
-
-* [Lucid](https://lucid.app/documents): used to create an initial ERD (environment relationship diagram.
-
-* [Figma](): used to create the original wireframe.
-
-* Markdown: used to create this README.md
-
-* Google Chrome and its developer tools was used to test the app during production.
-
-## Getting Started: 
-
-### Demo:
-[Click to write your dream project now!](https://scribist.herokuapp.com/)
-
-## Planned future enhancements:
-1. Add edit sections feature whereby you can drag and move a given section and it will re-render it on the Quill editor
-2. Add more consequences in Berserk Mode, for example have the screen turn crazy colors, or have it blast sounds at you.
-3. Sign in with Google Oauth, Github, or Facebook.
-4. Add ability to convert the doc various formats such as PDF, markdown, or html.
-5. Implement more on the about page and add donation option using Stripe.
-6. Style more and add animations and use a library like framer to have seamless popup interactivity.
-7. Add Ability to see more data about docs (words typed, created date, last updated, etc).
-8. Add search option in navbar to find docs faster.
-9. Add note-taking feature that can do todos (without all the text editing).
-10. Integrate ChatGPT API to aid for writing prompts and generating outlines.
+Auth is a JWT in `localStorage`, sent as a Bearer header to the API and in the socket handshake. It carries only the user's id, name and email.
