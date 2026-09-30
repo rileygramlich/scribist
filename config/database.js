@@ -1,38 +1,60 @@
 const mongoose = require("mongoose");
 
-// Fix deprecation warning
-mongoose.set("strictQuery", false);
+const url = (process.env.DATABASE_URL || "").trim() || "mongodb://127.0.0.1:27017/scribist";
 
-mongoose
-    .connect(process.env.DATABASE_URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
-    .then(() => {
-        console.log("Connected to MongoDB");
-    })
-    .catch((err) => {
-        console.error("MongoDB connection error:", err);
-    });
+if (process.env.NODE_ENV === "production" && !process.env.DATABASE_URL) {
+    console.error("DATABASE_URL is not set, so the app is trying a local MongoDB that does not exist here.");
+}
+if (/<[^>]*>/.test(url)) {
+    console.error("DATABASE_URL still contains a <placeholder>. Replace it, angle brackets included, with the real value.");
+}
 
-// Handle connection events
-mongoose.connection.on("error", (err) => {
-    console.error("Database error:", err);
-});
+// Give up quickly when the database is unreachable, so requests fail with a clear
+// message in seconds instead of hanging.
+const TIMEOUT_MS = 8000;
+const RETRY_AFTER_MS = 5000;
+mongoose.set("bufferTimeoutMS", TIMEOUT_MS);
 
-mongoose.connection.on("disconnected", () => {
-    console.log("Database disconnected");
-});
+mongoose.connection.on("connected", () => console.log(`Connected to MongoDB ${mongoose.connection.name}`));
+mongoose.connection.on("error", (err) => console.error("MongoDB error:", err.message));
 
-const { MongoClient, ServerApiVersion } = require("mongodb");
-const uri = process.env.DATABASE_URL;
-const client = new MongoClient(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    serverApi: ServerApiVersion.v1,
-});
-client.connect((err) => {
-    const collection = client.db("test").collection("devices");
-    // perform actions on the collection object
-    client.close();
-});
+let lastError = null;
+let lastAttempt = 0;
+let connecting = null;
+
+/** Connect, or reconnect after a failure (at most every few seconds). Rejects if it can't. */
+function ensureConnected() {
+    if (mongoose.connection.readyState === 1) return Promise.resolve();
+    if (connecting) return connecting;
+    if (lastError && Date.now() - lastAttempt < RETRY_AFTER_MS) return Promise.reject(lastError);
+    lastAttempt = Date.now();
+    connecting = mongoose
+        .connect(url, { serverSelectionTimeoutMS: TIMEOUT_MS })
+        .then(() => { lastError = null; })
+        .catch((err) => {
+            lastError = err;
+            console.error(`Could not connect to MongoDB: ${describe(err)}`);
+            throw err;
+        })
+        .finally(() => { connecting = null; });
+    return connecting;
+}
+
+ensureConnected().catch(() => {});
+
+/** For Atlas, Mongoose's message is always the generic allowlist hint; the real per-server errors are underneath. */
+function describe(err) {
+    const servers = err.reason && err.reason.servers ? [...err.reason.servers.values()] : [];
+    const details = [...new Set(servers.map((s) => s.error && s.error.message).filter(Boolean))];
+    return details.length ? `${err.name}: ${details.join(" | ")}` : `${err.name}: ${err.message}`;
+}
+
+function status() {
+    const connected = mongoose.connection.readyState === 1;
+    return {
+        database: connected ? "connected" : lastError ? "error" : "connecting",
+        reason: connected || !lastError ? undefined : describe(lastError),
+    };
+}
+
+module.exports = { ensureConnected, status };

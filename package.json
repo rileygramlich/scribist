@@ -1,71 +1,38 @@
 {
-    "name": "scribist",
-    "version": "0.1.0",
-    "engines": {
-        "node": ">=18.x",
-        "npm": "10.x"
-    },
-    "private": true,
-    "dependencies": {
-        "@testing-library/jest-dom": "^5.16.5",
-        "@testing-library/react": "^13.4.0",
-        "@testing-library/user-event": "^13.5.0",
-        "bcrypt": "^5.0.1",
-        "bcryptjs": "^3.0.2",
-        "bootstrap": "^5.2.3",
-        "cookie-parser": "^1.4.6",
-        "cors": "^2.8.5",
-        "dotenv": "^16.0.3",
-        "express": "^4.18.2",
-        "favicon": "^0.0.2",
-        "jsonwebtoken": "^9.0.0",
-        "mongoose": "^6.8.4",
-        "morgan": "^1.10.0",
-        "node": "^18.14.0",
-        "quill": "^1.3.7",
-        "react": "^18.2.0",
-        "react-bootstrap": "^2.7.0",
-        "react-dom": "^18.2.0",
-        "react-icons": "^4.12.0",
-        "react-redux": "^8.0.5",
-        "react-router": "^6.8.0",
-        "react-router-dom": "^6.7.0",
-        "react-scripts": "^5.0.1",
-        "serve-favicon": "^2.5.0",
-        "socket.io": "^4.5.4",
-        "socket.io-client": "^4.5.4",
-        "web-vitals": "^2.1.4"
-    },
-    "scripts": {
-        "start": "node server.js",
-        "dev": "concurrently 'npm run react' 'npm run server'",
-        "react": "react-scripts start",
-        "server": "nodemon server.js",
-        "build": "react-scripts build",
-        "vercel-build": "npm run build",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject"
-    },
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "react-app/jest"
-        ]
-    },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
-    },
-    "proxy": "http://localhost:3001",
-    "devDependencies": {
-        "nodemon": "^3.0.3"
-    }
+  "name": "scribist",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A writing app: documents you can edit together live, Berserk Mode, and a typing test.",
+  "type": "commonjs",
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "dev": "concurrently -n api,web -c blue,gray \"node --watch server.js\" \"vite\"",
+    "build": "vite build",
+    "start": "node server.js",
+    "preview": "vite build && node server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "compression": "^1.8.2",
+    "dotenv": "^18.0.4",
+    "express": "^5.2.1",
+    "google-auth-library": "^11.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^8.24.4",
+    "morgan": "^1.12.1",
+    "quill": "^2.0.3",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-icons": "^5.7.0",
+    "react-router-dom": "^7.18.4",
+    "socket.io": "^4.8.4",
+    "socket.io-client": "^4.8.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.1",
+    "concurrently": "^10.0.5",
+    "vite": "^8.3.1"
+  }
 }

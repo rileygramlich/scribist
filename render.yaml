@@ -1,0 +1,21 @@
+# Render Blueprint (fallback host). Free plan: real WebSockets, but it sleeps after
+# 15 idle minutes. Render asks for the `sync: false` values when you create it.
+services:
+  - type: web
+    name: scribist
+    runtime: node
+    plan: free
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "22"
+      - key: SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
