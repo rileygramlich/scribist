@@ -426,6 +426,9 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 .berserk__bar { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; padding: 0.4rem 0; }
 .berserk__clock { font: 600 2rem/1 var(--sans); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
 .berserk__clock.is-low { color: var(--danger); }
+.berserk__clock.is-over { color: var(--accent); }
+.berserk__over { margin-left: 0.5rem; font: 500 0.75rem/1 var(--sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); vertical-align: middle; }
+.berserk.is-focus .berserk__over { display: none; }
 .berserk__count { color: var(--ink-2); }
 .berserk__count strong { color: var(--ink); font-size: 1.15rem; font-variant-numeric: tabular-nums; }
 .berserk__tools { margin-left: auto; display: flex; align-items: center; gap: 0.25rem; }
@@ -448,6 +451,30 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 }
 .danger { position: absolute; left: 1.25rem; right: 1.25rem; bottom: 0.9rem; height: 3px; border-radius: 99px; overflow: hidden; pointer-events: none; }
 .danger span { display: block; height: 100%; background: var(--danger); transition: width 0.1s linear, opacity 0.2s ease; }
+/* Time's up: a small bar on the bottom edge of the page, never over the text you're looking at */
+.timeup {
+    position: absolute; left: 50%; bottom: 0.75rem; transform: translateX(-50%);
+    display: flex; align-items: center; gap: 0.35rem; flex-wrap: wrap; justify-content: center;
+    max-width: calc(100% - 1.5rem);
+    padding: 0.3rem 0.35rem 0.3rem 0.85rem;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 99px;
+    box-shadow: var(--shadow); font-size: 0.88rem; color: var(--ink-2);
+    animation: rise 0.25s ease;
+}
+.berserk__page.has-prompt .berserk__text { padding-bottom: 4.5rem !important; }
+.timeup__msg { font-weight: 600; color: var(--ink); margin-right: 0.25rem; }
+.timeup__btn {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.3rem 0.7rem; border: 0; border-radius: 99px;
+    background: transparent; color: var(--ink-2); font: inherit; cursor: pointer;
+}
+.timeup__btn:hover, .timeup__btn:focus-visible { background: var(--surface-2); color: var(--ink); }
+.timeup__btn--finish { color: var(--accent); }
+.timeup kbd {
+    font: 500 0.72rem/1 var(--mono); padding: 0.2rem 0.35rem;
+    border: 1px solid var(--line-strong); border-bottom-width: 2px; border-radius: 4px;
+    background: var(--surface-2); color: var(--ink-2);
+}
 .berserk__paused {
     position: absolute; inset: 0; display: grid; place-items: center;
     border-radius: var(--radius-lg);

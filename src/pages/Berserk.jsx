@@ -23,8 +23,12 @@ export default function Berserk({ user, notify }) {
     const [focus, setFocus] = useState(false);
     const [danger, setDanger] = useState(0);
     const [spentMs, setSpentMs] = useState(0);
+    // When the countdown reaches zero the session keeps going and the clock
+    // counts up. The prompt at the bottom offers keep writing or finish.
+    const [prompt, setPrompt] = useState(false);
 
     const endAt = useRef(0);
+    const overtime = useRef(false);
     const pausedLeft = useRef(0);
     const lastInput = useRef(0);
     const lastErase = useRef(0);
@@ -40,6 +44,8 @@ export default function Berserk({ user, notify }) {
         setPaused(false);
         setFocus(false);
         setDanger(0);
+        setPrompt(false);
+        overtime.current = false;
         hitTarget.current = false;
         endAt.current = Date.now() + duration;
         lastInput.current = Date.now();
@@ -48,9 +54,18 @@ export default function Berserk({ user, notify }) {
         setPhase("writing");
     }
 
+    // In overtime "left" is negative, so this includes the extra time.
     function finish() {
-        setSpentMs(duration - Math.max(0, paused ? pausedLeft.current : endAt.current - Date.now()));
+        setSpentMs(duration - (paused ? pausedLeft.current : endAt.current - Date.now()));
+        setPrompt(false);
         setPhase("done");
+    }
+
+    function keepWriting() {
+        setPrompt(false);
+        lastInput.current = Date.now(); // a fresh grace period after deciding
+        lastErase.current = 0;
+        area.current?.focus();
     }
 
     function togglePause() {
@@ -60,7 +75,7 @@ export default function Berserk({ user, notify }) {
             setPaused(false);
             setTimeout(() => area.current?.focus(), 0);
         } else {
-            pausedLeft.current = Math.max(0, endAt.current - Date.now());
+            pausedLeft.current = endAt.current - Date.now();
             setPaused(true);
         }
     }
@@ -79,14 +94,13 @@ export default function Berserk({ user, notify }) {
         const tick = setInterval(() => {
             const now = Date.now();
             const left = endAt.current - now;
-            if (left <= 0) {
-                setRemaining(0);
-                setSpentMs(duration);
-                setPhase("done");
-                return;
-            }
             setRemaining(left);
-            if (mode !== "berserk") return;
+            if (left <= 0 && !overtime.current) {
+                overtime.current = true;
+                setPrompt(true);
+            }
+            // No erasing while the prompt waits for a decision.
+            if (mode !== "berserk" || prompt) return;
             const idle = now - lastInput.current;
             setDanger(Math.min(1, idle / GRACE_MS));
             if (idle >= GRACE_MS && now - lastErase.current >= ERASE_EVERY_MS) {
@@ -95,7 +109,24 @@ export default function Berserk({ user, notify }) {
             }
         }, TICK_MS);
         return () => clearInterval(tick);
-    }, [phase, paused, mode, duration]);
+    }, [phase, paused, mode, prompt]);
+
+    // While the prompt is up, Enter keeps writing (without adding a new line)
+    // and Esc finishes. Listening on window covers the textarea and buttons.
+    useEffect(() => {
+        if (!prompt || paused) return;
+        function onKey(e) {
+            if (e.key === "Enter" && !e.shiftKey && !e.isComposing) {
+                e.preventDefault();
+                keepWriting();
+            } else if (e.key === "Escape") {
+                e.preventDefault();
+                finish();
+            }
+        }
+        window.addEventListener("keydown", onKey);
+        return () => window.removeEventListener("keydown", onKey);
+    });
 
     useEffect(() => {
         if (phase === "writing" && !hitTarget.current && words >= target) {
@@ -147,13 +178,19 @@ export default function Berserk({ user, notify }) {
         );
     }
 
-    if (phase === "done") return <Results {...{ text, words, target, spentMs, user, notify }} onAgain={() => setPhase("setup")} />;
+    if (phase === "done") return <Results {...{ text, words, target, spentMs, duration, user, notify }} onAgain={() => setPhase("setup")} />;
 
     const progress = Math.min(1, words / target);
+    const over = remaining <= 0;
+    // Overtime counts up in whole seconds, so it starts at +0:00.
+    const clock = over ? `+${formatClock(Math.floor(-remaining / 1000) * 1000)}` : formatClock(remaining);
     return (
         <section className={`berserk ${focus ? "is-focus" : ""}`}>
             <div className="berserk__bar">
-                <div className={`berserk__clock ${remaining < 60000 ? "is-low" : ""}`} aria-live="off">{formatClock(remaining)}</div>
+                <div className={`berserk__clock ${over ? "is-over" : remaining < 60000 ? "is-low" : ""}`} aria-live="off" title={over ? "Overtime" : undefined}>
+                    {clock}
+                    {over && <span className="berserk__over">overtime</span>}
+                </div>
                 {!focus && (
                     <div className="berserk__count">
                         <strong>{words.toLocaleString()}</strong> / {target.toLocaleString()} words
@@ -173,7 +210,7 @@ export default function Berserk({ user, notify }) {
                 </div>
             </div>
             <div className="meter" aria-hidden="true"><span className={progress >= 1 ? "is-full" : ""} style={{ width: `${progress * 100}%` }} /></div>
-            <div className="berserk__page">
+            <div className={`berserk__page ${prompt && !paused ? "has-prompt" : ""}`}>
                 <textarea
                     ref={area}
                     className="berserk__text"
@@ -184,8 +221,19 @@ export default function Berserk({ user, notify }) {
                     spellCheck="false"
                     aria-label="Berserk writing area"
                 />
-                {mode === "berserk" && !paused && (
+                {mode === "berserk" && !paused && !prompt && (
                     <div className="danger" aria-hidden="true"><span style={{ width: `${danger * 100}%`, opacity: danger > 0.4 ? 1 : danger }} /></div>
+                )}
+                {prompt && !paused && (
+                    <div className="timeup" role="status">
+                        <span className="timeup__msg">Time's up.</span>
+                        <button type="button" className="timeup__btn" onClick={keepWriting}>
+                            <kbd>Enter</kbd> Keep writing
+                        </button>
+                        <button type="button" className="timeup__btn timeup__btn--finish" onClick={finish}>
+                            <kbd>Esc</kbd> Finish
+                        </button>
+                    </div>
                 )}
                 {paused && <div className="berserk__paused">Paused. Take a breath.</div>}
             </div>
@@ -193,7 +241,7 @@ export default function Berserk({ user, notify }) {
     );
 }
 
-function Results({ text, words, target, spentMs, user, notify, onAgain }) {
+function Results({ text, words, target, spentMs, duration, user, notify, onAgain }) {
     const [saving, setSaving] = useState(false);
     const navigate = useNavigate();
     const mins = Math.max(spentMs / 60000, 1 / 60);
@@ -222,6 +270,9 @@ function Results({ text, words, target, spentMs, user, notify, onAgain }) {
                 <div><strong>{formatClock(spentMs)}</strong><span>time</span></div>
                 <div><strong>{wpm}</strong><span>words / min</span></div>
             </div>
+            {spentMs - duration >= 1000 && (
+                <p className="muted">Includes {formatClock(spentMs - duration)} of overtime.</p>
+            )}
             {text.trim() && <blockquote className="preview">{text.length > 600 ? `${text.slice(0, 600)}…` : text}</blockquote>}
             <div className="row">
                 {user ? (
